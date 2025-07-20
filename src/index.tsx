@@ -1,6 +1,8 @@
-import { createRoot } from "react-dom/client";
-import App from "./App";
 import React, { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
+import App from "./App";
 import { makeServer } from "./mirage/server";
 
 const root = document.getElementById("root");
@@ -13,6 +15,8 @@ makeServer({ environment: "development" });
 
 createRoot(root).render(
   <StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </StrictMode>
 );

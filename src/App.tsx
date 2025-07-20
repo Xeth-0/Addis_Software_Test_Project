@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { SongList } from "./components/SongList";
-import { mockSongs } from "./mirage/data/songsMockData"; // TODO: API call from mirage later
 import "./index.css";
 
 const AppContainer = styled.div`
@@ -15,7 +14,7 @@ const AppContainer = styled.div`
 const App = () => {
   return (
     <AppContainer>
-      <SongList songs={[...mockSongs, ...mockSongs, ...mockSongs, ...mockSongs, ...mockSongs, ...mockSongs, ...mockSongs]} title="MUSIC!!!" />
+      <SongList title="MUSIC!!!" />
     </AppContainer>
   );
 };
