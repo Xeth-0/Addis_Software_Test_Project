@@ -124,7 +124,6 @@ export const ContentArea = styled.div`
   padding: 0;
 
   @media (max-width: 768px) {
-    padding: 10px;
     padding-bottom: 0;
   }
 `;
@@ -158,14 +157,14 @@ export const MobileOverlay = styled.div<{ isVisible: boolean }>`
   }
 `;
 
-export const MobileToggle = styled.button`
+export const MobileToggle = styled.button<{ isVisible: boolean }>`
   display: none;
   
   @media (max-width: 768px) {
-    display: flex;
+    display: ${(props) => (props.isVisible ? "flex" : "none")};
     position: fixed;
-    top: 16px;
-    left: 16px;
+    top: 2px;
+    left: 2px;
     z-index: 15;
     background: white;
     border: 1px solid #e5e7eb;
