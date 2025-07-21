@@ -28,6 +28,10 @@ export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 768px) {
+    justify-content: space-around;
+  }
 `;
 
 export const Title = styled.h2`

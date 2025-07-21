@@ -30,7 +30,9 @@ const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeNav, setActiveNav] = useState<string>("library");
   const [editingSong, setEditingSong] = useState<Song | undefined>(undefined);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(
+    typeof window !== "undefined" ? window.innerWidth < 768 : false
+  );
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 

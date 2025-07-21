@@ -100,13 +100,17 @@ export const NavItem = styled.div<{ active?: boolean; isCollapsed: boolean }>`
   margin: 0 8px;
   border-radius: 8px;
   cursor: pointer;
-  background: ${(props) => (props.active ? props.theme.colors.primary : "transparent")};
+  background: ${(props) =>
+    props.active ? props.theme.colors.primary : "transparent"};
   color: ${(props) => (props.active ? "white" : props.theme.colors.text)};
   transition: all 0.2s ease;
   justify-content: ${(props) => (props.isCollapsed ? "center" : "flex-start")};
 
   &:hover {
-    background: ${(props) => (props.active ? props.theme.colors.primaryHover : props.theme.colors.hoverBackground)};
+    background: ${(props) =>
+      props.active
+        ? props.theme.colors.primaryHover
+        : props.theme.colors.hoverBackground};
   }
 `;
 
@@ -171,17 +175,31 @@ export const MobileToggle = styled.button<{ isVisible: boolean }>`
 
   @media (max-width: 768px) {
     display: ${(props) => (props.isVisible ? "flex" : "none")};
-    // position: relative;
-    top: 2px;
-    left: 2px;
+    position: fixed;
+    top: 16px;
+    left: 16px;
     z-index: 15;
     background: ${({ theme }) => theme.colors.background};
     border: 1px solid ${({ theme }) => theme.colors.border};
-    padding: 8px;
-    border-radius: 8px;
+    padding: 12px;
+    border-radius: 12px;
     cursor: pointer;
     align-items: center;
     justify-content: center;
     box-shadow: ${({ theme }) => theme.colors.boxShadow};
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: ${({ theme }) => theme.colors.hoverBackground};
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    @media (max-width: 768px) {
+      float: right;
+    }
   }
 `;
