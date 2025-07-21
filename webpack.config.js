@@ -1,5 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { webpack } = require("webpack");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = (env, _) => {
   return {
@@ -37,7 +39,7 @@ module.exports = (env, _) => {
             filename: "images/[name][ext][query]",
           },
         },
-        { 
+        {
           test: /\.avif$/i,
           type: "asset/resource",
           generator: {
@@ -50,6 +52,14 @@ module.exports = (env, _) => {
       new HtmlWebpackPlugin({
         template: "./public/index.html",
         inject: "body",
+      }),
+      new Dotenv({
+        path: "./.env",
+        safe: true,
+        allowEmptyValues: true,
+        systemvars: true,
+        silent: true,
+        defaults: false,
       }),
     ],
     optimization: {

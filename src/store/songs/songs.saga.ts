@@ -18,14 +18,14 @@ import { Song } from "./songs.types";
 
 function fetchSongsApi(limit: number = 0, page: number = 1) {
   console.log("fetching songs from the API (Mirage)");
-  return fetch(`/api/songs?limit=${limit}&page=${page}`).then((res) =>
-    res.json()
-  );
+  return fetch(
+    `${process.env.API_BASE_URL}/songs?limit=${limit}&page=${page}`
+  ).then((res) => res.json());
 }
 
 function addSongApi(song: Song) {
   console.log("adding song to the API (Mirage)");
-  return fetch("/api/songs", {
+  return fetch(`${process.env.API_BASE_URL}/songs`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -36,7 +36,7 @@ function addSongApi(song: Song) {
 
 function updateSongApi(song: Song) {
   console.log("updating song to the API (Mirage)");
-  return fetch(`/api/songs/${song.id}`, {
+  return fetch(`${process.env.API_BASE_URL}/songs/${song.id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -47,7 +47,7 @@ function updateSongApi(song: Song) {
 
 function deleteSongApi(id: string) {
   console.log("deleting song from the API (Mirage)");
-  return fetch(`/api/songs/${id}`, {
+  return fetch(`${process.env.API_BASE_URL}/songs/${id}`, {
     method: "DELETE",
   }).then((res) => res.json());
 }
