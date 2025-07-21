@@ -4,18 +4,17 @@ export const AppContainer = styled.div`
   display: flex;
   height: 100vh;
   overflow: hidden;
-  background-color: rgb(235, 221, 221);
+  background-color: ${({ theme }) => theme.colors.background};
 `;
 
 export const Sidebar = styled.div<{ isCollapsed: boolean }>`
   width: ${(props) => (props.isCollapsed ? "60px" : "240px")};
-  background: #f8f9fa;
-  border-right: 1px solid #e5e7eb;
+  background: ${({ theme }) => theme.colors.secondaryBackground};
+  border-right: 1px solid ${({ theme }) => theme.colors.border};
   display: flex;
   flex-direction: column;
   transition: width 0.3s ease;
   flex-shrink: 0;
-  
   z-index: 10;
 
   @media (max-width: 768px) {
@@ -23,25 +22,27 @@ export const Sidebar = styled.div<{ isCollapsed: boolean }>`
     left: ${(props) => (props.isCollapsed ? "-240px" : "0")};
     width: 240px;
     height: 100vh;
-    box-shadow: ${(props) => (props.isCollapsed ? "none" : "2px 0 8px rgba(0,0,0,0.1)")};
+    box-shadow: ${(props) =>
+      props.isCollapsed ? "none" : `${props.theme.colors.boxShadow}`};
   }
 `;
 
 export const SidebarHeader = styled.div<{ isCollapsed: boolean }>`
   display: flex;
   align-items: center;
-  justify-content: ${(props) => (props.isCollapsed ? "center" : "space-between")};
+  justify-content: ${(props) =>
+    props.isCollapsed ? "center" : "space-between"};
   padding: 16px;
   height: 5vh;
-  border-bottom: 1px solid #e5e7eb;
-  background: #fff;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+  background: ${({ theme }) => theme.colors.background};
 `;
 
 export const AppTitle = styled.h1<{ isCollapsed: boolean }>`
   margin: 0;
   font-size: 18px;
   font-weight: 600;
-  color: #1f2937;
+  color: ${({ theme }) => theme.colors.text};
   opacity: ${(props) => (props.isCollapsed ? "0" : "1")};
   transition: opacity 0.3s ease;
   white-space: nowrap;
@@ -53,13 +54,13 @@ export const ToggleButton = styled.button`
   border: none;
   padding: 4px;
   cursor: pointer;
-  color: #6b7280;
+  color: ${({ theme }) => theme.colors.text};
   border-radius: 4px;
   transition: all 0.2s ease;
 
   &:hover {
-    background: #f3f4f6;
-    color: #374151;
+    background: ${({ theme }) => theme.colors.hoverBackground};
+    color: ${({ theme }) => theme.colors.text};
   }
 `;
 
@@ -82,7 +83,7 @@ export const NavSection = styled.div`
 export const SectionTitle = styled.h3<{ isCollapsed: boolean }>`
   font-size: 12px;
   font-weight: 600;
-  color: #6b7280;
+  color: ${({ theme }) => theme.colors.secondaryText};
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin: 0 0 8px 0;
@@ -99,13 +100,13 @@ export const NavItem = styled.div<{ active?: boolean; isCollapsed: boolean }>`
   margin: 0 8px;
   border-radius: 8px;
   cursor: pointer;
-  background: ${(props) => (props.active ? "#3b82f6" : "transparent")};
-  color: ${(props) => (props.active ? "white" : "#374151")};
+  background: ${(props) => (props.active ? props.theme.colors.primary : "transparent")};
+  color: ${(props) => (props.active ? "white" : props.theme.colors.text)};
   transition: all 0.2s ease;
   justify-content: ${(props) => (props.isCollapsed ? "center" : "flex-start")};
 
   &:hover {
-    background: ${(props) => (props.active ? "#2563eb" : "#f3f4f6")};
+    background: ${(props) => (props.active ? props.theme.colors.primaryHover : props.theme.colors.hoverBackground)};
   }
 `;
 
@@ -152,7 +153,7 @@ export const PlayerWrapper = styled.div`
 
 export const MobileOverlay = styled.div<{ isVisible: boolean }>`
   display: none;
-  
+
   @media (max-width: 768px) {
     display: ${(props) => (props.isVisible ? "block" : "none")};
     position: fixed;
@@ -160,27 +161,27 @@ export const MobileOverlay = styled.div<{ isVisible: boolean }>`
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: ${({ theme }) => theme.colors.overlay};
     z-index: 5;
   }
 `;
 
 export const MobileToggle = styled.button<{ isVisible: boolean }>`
   display: none;
-  
+
   @media (max-width: 768px) {
     display: ${(props) => (props.isVisible ? "flex" : "none")};
-    position: fixed;
+    // position: relative;
     top: 2px;
     left: 2px;
     z-index: 15;
-    background: white;
-    border: 1px solid #e5e7eb;
+    background: ${({ theme }) => theme.colors.background};
+    border: 1px solid ${({ theme }) => theme.colors.border};
     padding: 8px;
     border-radius: 8px;
     cursor: pointer;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: ${({ theme }) => theme.colors.boxShadow};
   }
-`; 
+`;

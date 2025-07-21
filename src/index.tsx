@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import App from "./App";
 import { makeServer } from "./mirage/server";
+import { ThemeContextProvider } from "./styles/theme/ThemeContext";
 
 const root = document.getElementById("root");
 if (!root) {
@@ -16,7 +17,9 @@ makeServer({ environment: "development" });
 createRoot(root).render(
   <StrictMode>
     <Provider store={store}>
-      <App />
+      <ThemeContextProvider>
+        <App />
+      </ThemeContextProvider>
     </Provider>
   </StrictMode>
 );

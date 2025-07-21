@@ -4,8 +4,8 @@ export const SongContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 8px 16px;
-  background: white;
-  border-bottom: 1px solid #e5e5e5;
+  background: ${({ theme }) => theme.colors.background};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
   cursor: pointer;
   transition: background-color 0.1s ease;
   position: relative;
@@ -15,7 +15,7 @@ export const SongContainer = styled.div`
   }
 
   &:hover {
-    background: #f7f7f7;
+    background: ${({ theme }) => theme.colors.hoverBackground};
 
     .song-actions {
       opacity: 1;
@@ -23,7 +23,7 @@ export const SongContainer = styled.div`
   }
 
   &:active {
-    background: #e8e8e8;
+    background: ${({ theme }) => theme.colors.activeBackground};
   }
 
   @media (max-width: 768px) {
@@ -51,10 +51,11 @@ export const SongInfo = styled.div`
   min-width: 0;
 `;
 
-export const Title = styled.div`
+export const Title = styled.div<{ isPlaying: boolean }>`
   font-size: 14px;
   font-weight: 500;
-  color: #000;
+  color: ${({ theme, isPlaying }) =>
+    isPlaying ? theme.colors.primary : theme.colors.text};
   margin-bottom: 2px;
   white-space: nowrap;
   overflow: hidden;
@@ -63,7 +64,7 @@ export const Title = styled.div`
 
 export const Details = styled.div`
   font-size: 12px;
-  color: #666;
+  color: ${({ theme }) => theme.colors.secondaryText};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -71,7 +72,7 @@ export const Details = styled.div`
 
 export const Duration = styled.div`
   font-size: 12px;
-  color: #999;
+  color: ${({ theme }) => theme.colors.mutedText};
   margin-left: 8px;
   flex-shrink: 0;
 `;
@@ -90,19 +91,19 @@ export const ActionButton = styled.button`
   padding: 4px;
   border-radius: 4px;
   cursor: pointer;
-  color: #666;
+  color: ${({ theme }) => theme.colors.secondaryText};
   transition: all 0.2s ease;
 
   &:hover {
-    background: #e0e0e0;
-    color: #333;
+    background: ${({ theme }) => theme.colors.hoverBackground};
+    color: ${({ theme }) => theme.colors.text};
   }
 `;
 
 export const SongNumber = styled.div`
   font-size: 12px;
-  color: #666;
+  color: ${({ theme }) => theme.colors.tertiaryText};
   margin-right: 8px;
   flex-shrink: 0;
   width: 3em;
-`; 
+`;

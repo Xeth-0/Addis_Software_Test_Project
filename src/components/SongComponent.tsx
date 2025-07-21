@@ -65,7 +65,7 @@ export const SongComponent: React.FC<SongProps> = ({
       </picture>
 
       <SongInfo>
-        <Title style={{ color: isPlaying ? "#007AFF" : "#000" }}>
+        <Title isPlaying={isPlaying || false}>
           {song.title}
         </Title>
         <Details>

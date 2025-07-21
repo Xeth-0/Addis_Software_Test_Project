@@ -5,9 +5,9 @@ export const Container = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(248, 248, 248, 0.95);
+  background: ${({ theme }) => theme.colors.backdropBlur};
   backdrop-filter: blur(20px);
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
   padding: 12px 20px;
   display: flex;
   align-items: center;
@@ -39,7 +39,7 @@ export const Details = styled.div`
 export const Title = styled.div`
   font-size: 14px;
   font-weight: 500;
-  color: #000;
+  color: ${({ theme }) => theme.colors.text};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -47,7 +47,7 @@ export const Title = styled.div`
 
 export const Artist = styled.div`
   font-size: 12px;
-  color: #666;
+  color: ${({ theme }) => theme.colors.secondaryText};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -60,20 +60,20 @@ export const Controls = styled.div`
 `;
 
 export const ControlButton = styled.button<{ primary?: boolean }>`
-  background: ${(props) => (props.primary ? "#007AFF" : "none")};
+  background: ${(props) => (props.primary ? props.theme.colors.primary : "none")};
   border: none;
   padding: 8px;
   border-radius: 50%;
   cursor: pointer;
-  color: ${(props) => (props.primary ? "white" : "#666")};
+  color: ${(props) => (props.primary ? "white" : props.theme.colors.secondaryText)};
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
 
   &:hover {
-    background: ${(props) => (props.primary ? "#0056CC" : "#e0e0e0")};
-    color: ${(props) => (props.primary ? "white" : "#333")};
+    background: ${(props) => (props.primary ? props.theme.colors.primaryHover : props.theme.colors.hoverBackground)};
+    color: ${(props) => (props.primary ? "white" : props.theme.colors.text)};
   }
 `;
 
@@ -86,14 +86,14 @@ export const ProgressContainer = styled.div`
 export const ProgressBar = styled.div`
   width: 100%;
   height: 4px;
-  background: #e0e0e0;
+  background: ${({ theme }) => theme.colors.disabledBackground};
   border-radius: 2px;
   overflow: hidden;
 `;
 
 export const Progress = styled.div<{ progress: number }>`
   height: 100%;
-  background: #007aff;
+  background: ${({ theme }) => theme.colors.primary};
   width: ${(props) => props.progress}%;
   transition: width 0.1s ease;
 `;
@@ -102,7 +102,7 @@ export const TimeDisplay = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 11px;
-  color: #666;
+  color: ${({ theme }) => theme.colors.tertiaryText};
   margin-top: 4px;
 `;
 
@@ -154,23 +154,23 @@ export const NowPlayingSidebarContainerMetadata = styled.div<{
   #now-playing-sidebar-container-metadata-title {
     font-size: 16px;
     font-weight: 600;
-    color: #000;
+    color: ${({ theme }) => theme.colors.text};
   }
 
   #now-playing-sidebar-container-metadata-artist {
     font-size: 14px;
-    color: #666;
+    color: ${({ theme }) => theme.colors.secondaryText};
     font-weight: 500;
   }
 
   #now-playing-sidebar-container-metadata-album {
     font-size: 13px;
-    color: #888;
+    color: ${({ theme }) => theme.colors.mutedText};
   }
 
   #now-playing-sidebar-container-metadata-year {
     font-size: 12px;
-    color: #aaa;
+    color: ${({ theme }) => theme.colors.tertiaryText};
   }
 
   @keyframes scroll-text {

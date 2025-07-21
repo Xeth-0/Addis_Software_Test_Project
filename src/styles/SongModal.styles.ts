@@ -6,7 +6,7 @@ export const Overlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: ${({ theme }) => theme.colors.overlay};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,14 +14,14 @@ export const Overlay = styled.div`
 `;
 
 export const Modal = styled.div`
-  background: white;
+  background: ${({ theme }) => theme.colors.background};
   border-radius: 12px;
   padding: 24px;
   width: 90%;
   max-width: 500px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: ${({ theme }) => theme.colors.modalShadow};
 `;
 
 export const Header = styled.div`
@@ -35,7 +35,7 @@ export const Title = styled.h2`
   margin: 0;
   font-size: 20px;
   font-weight: 600;
-  color: #333;
+  color: ${({ theme }) => theme.colors.text};
   flex: 1;
 `;
 
@@ -45,12 +45,12 @@ export const CloseButton = styled.button`
   padding: 8px;
   border-radius: 6px;
   cursor: pointer;
-  color: #666;
+  color: ${({ theme }) => theme.colors.secondaryText};
   transition: all 0.2s ease;
 
   &:hover {
-    background: #f0f0f0;
-    color: #333;
+    background: ${({ theme }) => theme.colors.disabledBackground};
+    color: ${({ theme }) => theme.colors.text};
   }
 `;
 
@@ -69,20 +69,20 @@ export const FormGroup = styled.div`
 export const Label = styled.label`
   font-size: 14px;
   font-weight: 500;
-  color: #333;
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 export const Input = styled.input`
   padding: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid ${({ theme }) => theme.colors.borderLight};
   border-radius: 8px;
   font-size: 14px;
   transition: border-color 0.2s ease;
 
   &:focus {
     outline: none;
-    border-color: #007aff;
-    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+    border-color: ${({ theme }) => theme.colors.primary};
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.primary}22;
   }
 `;
 
@@ -105,19 +105,19 @@ export const Button = styled.button<{ variant?: "primary" | "secondary" }>`
   ${(props) =>
     props.variant === "primary"
       ? `
-    background: #007AFF;
+    background: ${props.theme.colors.primary};
     color: white;
     
     &:hover {
-      background: #0056CC;
+      background: ${props.theme.colors.primaryHover};
     }
   `
       : `
-    background: #f0f0f0;
-    color: #333;
+    background: ${props.theme.colors.disabledBackground};
+    color: ${props.theme.colors.text};
     
     &:hover {
-      background: #e0e0e0;
+      background: ${props.theme.colors.hoverBackground};
     }
   `}
 `; 

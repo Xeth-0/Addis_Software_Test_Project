@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Plus } from "lucide-react";
+import { Plus, Sun, Moon } from "lucide-react";
 
 import { fetchSongsRequest, Song, RootState } from "../store";
 import {
@@ -15,7 +15,9 @@ import {
   SliderInput,
   SliderValue,
   ControlsContainer,
+  ThemeToggleButton,
 } from "../styles/SongList.styles";
+import { useTheme } from "../styles/theme/ThemeContext";
 
 import { SongComponent } from "./SongComponent";
 import LoadingComponent from "./LoadingComponent";
@@ -51,6 +53,7 @@ export const SongListComponent: React.FC<SongListProps> = ({
   const error = useSelector((state: RootState) => state.songs.error);
   const total = useSelector((state: RootState) => state.songs.total);
   const limit = useSelector((state: RootState) => state.songs.limit);
+  const { isDark, toggleTheme } = useTheme();
 
   const dispatch = useDispatch();
 
@@ -75,7 +78,10 @@ export const SongListComponent: React.FC<SongListProps> = ({
 
   // For favorites, pagination is client side
   const paginatedSongs = isFavorites
-    ? listSongs.slice((currentPage - 1) * songsPerPage, currentPage * songsPerPage)
+    ? listSongs.slice(
+        (currentPage - 1) * songsPerPage,
+        currentPage * songsPerPage
+      )
     : listSongs;
 
   return (
@@ -83,6 +89,9 @@ export const SongListComponent: React.FC<SongListProps> = ({
       <SongListContainer id="song-list-container">
         <Header id="song-list-header">
           <Title>{title}</Title>
+          <ThemeToggleButton id="theme-toggle" onClick={toggleTheme}>
+            {!isDark ? <Sun size={20} /> : <Moon size={20} />}
+          </ThemeToggleButton>
         </Header>
 
         <ControlsContainer>
@@ -114,17 +123,21 @@ export const SongListComponent: React.FC<SongListProps> = ({
           <div id="error-songs">Error: {error}</div>
         ) : (
           <List id="song-list">
-            {paginatedSongs.map((song, index) => (
-              <SongComponent
-                key={song.id}
-                song={song}
-                onClick={() => onPlaySong(song)}
-                onEdit={() => onEditSong(song)}
-                onDelete={() => onDeleteSong(song)}
-                isPlaying={currentlyPlaying?.id === song.id}
-                index={(currentPage - 1) * songsPerPage + index}
-              />
-            ))}
+            {paginatedSongs.length > 0 ? (
+              paginatedSongs.map((song, index) => (
+                <SongComponent
+                  key={song.id}
+                  song={song}
+                  onClick={() => onPlaySong(song)}
+                  onEdit={() => onEditSong(song)}
+                  onDelete={() => onDeleteSong(song)}
+                  isPlaying={currentlyPlaying?.id === song.id}
+                  index={(currentPage - 1) * songsPerPage + index}
+                />
+              ))
+            ) : (
+              <div>No songs found</div>
+            )}
           </List>
         )}
       </SongListContainer>

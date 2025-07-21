@@ -1,7 +1,7 @@
 import "./index.css";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { Menu } from "lucide-react";
+import { Menu, Sun, Moon } from "lucide-react";
 
 import {
   addSongRequest,
@@ -113,7 +113,7 @@ const App = () => {
         <MainContent>
           <ContentArea className="content-area">
             {/* <SongListWrapper> */}
-           
+
             <SongListComponent
               title={
                 activeNav === "library"

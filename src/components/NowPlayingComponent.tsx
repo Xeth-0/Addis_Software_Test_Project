@@ -15,6 +15,7 @@ import {
   Progress,
   TimeDisplay,
 } from "../styles/NowPlaying.styles";
+import { useTheme } from "../styles/theme/ThemeContext";
 
 interface NowPlayingBarProps {
   song: Song | null;
@@ -36,6 +37,8 @@ export const NowPlayingComponent: React.FC<NowPlayingBarProps> = ({
   onNext,
 }) => {
   if (!song) return null;
+  
+  const { isDark } = useTheme();
 
   const progress = totalTime > 0 ? (currentTime / totalTime) * 100 : 0;
 

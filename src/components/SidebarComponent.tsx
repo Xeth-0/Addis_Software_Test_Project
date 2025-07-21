@@ -20,6 +20,7 @@ import {
   NowPlayingSidebarContainerMetadata,
 } from "../styles/NowPlaying.styles";
 import { useEffect, useRef } from "react";
+import { useTheme } from "../styles/theme/ThemeContext";
 
 const useScrollingText = (text: string) => {
   const ref = useRef<HTMLSpanElement>(null);
@@ -65,6 +66,7 @@ export const SidebarComponent = ({
   const artistRef = useScrollingText(nowPlaying?.artist || "");
   const albumRef = useScrollingText(nowPlaying?.album || "");
   const yearRef = useScrollingText(nowPlaying?.year?.toString() || "");
+  const { isDark } = useTheme();
 
   return (
     <Sidebar isCollapsed={isSidebarCollapsed}>
