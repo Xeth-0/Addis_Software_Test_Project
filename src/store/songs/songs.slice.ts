@@ -3,6 +3,8 @@ import { Song } from "./songs.types";
 
 interface SongState {
   list: Song[];
+  favorites: Song[];
+  playing: Song | null;
   loading: boolean;
   error: string | null;
   total: number;
@@ -12,6 +14,8 @@ interface SongState {
 
 const initialState: SongState = {
   list: [],
+  favorites: [],
+  playing: null,
   loading: true,
   error: null,
   total: 0,
@@ -100,6 +104,26 @@ const songsSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+
+    // FAVORITES
+    addFavorite(state, action: PayloadAction<Song>) {
+      console.log("addFavorite", action.payload);
+      state.favorites.push(action.payload);
+    },
+    removeFavorite(state, action: PayloadAction<Song>) {
+      console.log("removeFavorite", action.payload);
+      state.favorites = state.favorites.filter(
+        (song) => song.id !== action.payload.id
+      );
+    },
+
+    // PLAYING
+    setPlaying(state, action: PayloadAction<Song | null>) {
+      state.playing = action.payload;
+    },
+    clearPlaying(state) {
+      state.playing = null;
+    },
   },
 });
 
@@ -119,6 +143,12 @@ export const {
   deleteSongRequest,
   deleteSongSuccess,
   deleteSongFailure,
+
+  addFavorite,
+  removeFavorite,
+
+  setPlaying,
+  clearPlaying,
 } = songsSlice.actions;
 
 export default songsSlice.reducer;

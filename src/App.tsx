@@ -1,6 +1,6 @@
 import "./index.css";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu } from "lucide-react";
 
 import {
@@ -31,8 +31,13 @@ const App = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [nowPlaying, setNowPlaying] = useState<Song | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeNav]);
 
   const handleSaveSong = (songData: Omit<Song, "id">) => {
     if (editingSong) {
@@ -115,13 +120,15 @@ const App = () => {
                   ? "Library"
                   : activeNav === "favorites"
                   ? "Favorites"
-                  : "Settings"
+                  : "How are you here?"
               }
               onPlaySong={handlePlaySong}
               onAddSong={handleAddSong}
               onEditSong={handleEditSong}
               onDeleteSong={handleDeleteSong}
               currentlyPlaying={nowPlaying}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
             />
             {/* </SongListWrapper> */}
           </ContentArea>

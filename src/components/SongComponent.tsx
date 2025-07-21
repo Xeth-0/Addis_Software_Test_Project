@@ -1,5 +1,5 @@
-import { Edit, Edit2, Play, Trash } from "lucide-react";
-import { Song } from "../store";
+import { Edit, Edit2, Heart, Play, Trash } from "lucide-react";
+import { addFavorite, removeFavorite, RootState, Song } from "../store";
 import {
   SongContainer,
   Thumbnail,
@@ -11,6 +11,7 @@ import {
   ActionButton,
   SongNumber,
 } from "../styles/SongComponent.styles";
+import { useDispatch, useSelector } from "react-redux";
 
 interface SongProps {
   song: Song;
@@ -31,6 +32,19 @@ export const SongComponent: React.FC<SongProps> = ({
   onDelete,
   index,
 }) => {
+  const dispatch = useDispatch();
+  const isFavorite = useSelector((state: RootState) =>
+    state.songs.favorites.some((favorite) => favorite.id === song.id)
+  );
+
+  function onFavorite() {
+    if (isFavorite) {
+      dispatch(removeFavorite(song));
+    } else {
+      dispatch(addFavorite(song));
+    }
+  }
+
   return (
     <SongContainer
       id={`song-container-${song.id}`}
@@ -58,6 +72,9 @@ export const SongComponent: React.FC<SongProps> = ({
           {song.artist} • {song.album} • {song.year}
         </Details>
       </SongInfo>
+      <ActionButton onClick={onFavorite} title="Favorite">
+        <Heart size={16} color={isFavorite ? "#FF5050" : "#666"} fill={isFavorite ? "#FF5959" : "none"} />
+      </ActionButton>
       <Duration>{song.duration}</Duration>
       <Actions className="song-actions">
         <ActionButton onClick={onPlay} title="Play" aria-label="Play">

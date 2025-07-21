@@ -21,7 +21,6 @@ import {
 } from "../styles/NowPlaying.styles";
 import { useEffect, useRef } from "react";
 
-// Minimal hook for scrolling text on overflow
 const useScrollingText = (text: string) => {
   const ref = useRef<HTMLSpanElement>(null);
 
@@ -34,7 +33,6 @@ const useScrollingText = (text: string) => {
 
     const isOverflowing = el.scrollWidth > parentElement.offsetWidth;
     if (isOverflowing) {
-      // Remove text-align: center to allow scrolling text to align left
       const distance = el.scrollWidth - parentElement.offsetWidth + 20;
       el.style.animation = `scroll-text 4s infinite alternate ease-in-out`;
       el.style.setProperty("--scroll-distance", `-${distance}px`);

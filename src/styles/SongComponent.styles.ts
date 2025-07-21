@@ -104,4 +104,5 @@ export const SongNumber = styled.div`
   color: #666;
   margin-right: 8px;
   flex-shrink: 0;
+  width: 3em;
 `; 

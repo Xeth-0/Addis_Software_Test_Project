@@ -30,6 +30,8 @@ interface SongListProps {
   onPlaySong: (song: Song) => void;
   onEditSong: (song: Song) => void;
   onDeleteSong: (song: Song) => void;
+  currentPage: number;
+  setCurrentPage: (page: number) => void;
   currentlyPlaying: Song | null;
 }
 
@@ -40,8 +42,11 @@ export const SongListComponent: React.FC<SongListProps> = ({
   onEditSong,
   onDeleteSong,
   currentlyPlaying,
+  currentPage,
+  setCurrentPage,
 }) => {
   const songs = useSelector((state: RootState) => state.songs.list);
+  const favorites = useSelector((state: RootState) => state.songs.favorites);
   const loading = useSelector((state: RootState) => state.songs.loading);
   const error = useSelector((state: RootState) => state.songs.error);
   const total = useSelector((state: RootState) => state.songs.total);
@@ -49,14 +54,29 @@ export const SongListComponent: React.FC<SongListProps> = ({
 
   const dispatch = useDispatch();
 
-  const [currentPage, setCurrentPage] = useState(1);
   const [songsPerPage, setSongsPerPage] = useState(SONGS_PER_PAGE);
 
-  const totalPages = limit ? Math.ceil(total / limit) : 1;
+  const isFavorites = title === "Favorites";
+  const listSongs = isFavorites ? favorites : songs;
 
+  // Calculate totalPages based on the current list
+  const totalPages = isFavorites
+    ? Math.max(1, Math.ceil(favorites.length / songsPerPage))
+    : limit
+    ? Math.ceil(total / limit)
+    : 1;
+
+  // Only fetch songs if not showing favorites
   useEffect(() => {
-    dispatch(fetchSongsRequest({ limit: songsPerPage, page: currentPage }));
-  }, [currentPage, dispatch, songsPerPage]);
+    if (!isFavorites) {
+      dispatch(fetchSongsRequest({ limit: songsPerPage, page: currentPage }));
+    }
+  }, [currentPage, dispatch, songsPerPage, isFavorites]);
+
+  // For favorites, pagination is client side
+  const paginatedSongs = isFavorites
+    ? listSongs.slice((currentPage - 1) * songsPerPage, currentPage * songsPerPage)
+    : listSongs;
 
   return (
     <>
@@ -94,7 +114,7 @@ export const SongListComponent: React.FC<SongListProps> = ({
           <div id="error-songs">Error: {error}</div>
         ) : (
           <List id="song-list">
-            {songs.map((song, index) => (
+            {paginatedSongs.map((song, index) => (
               <SongComponent
                 key={song.id}
                 song={song}
