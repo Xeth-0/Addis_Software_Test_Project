@@ -8,7 +8,7 @@ export const SongListContainer = styled.div`
   margin: 0;
   background: ${({ theme }) => theme.colors.background};
   border-radius: 8px;
-  overflow-y: scroll;
+  overflow: hidden;
   box-shadow: ${({ theme }) => theme.colors.listShadow};
 
   @media (max-width: 768px) {
@@ -59,7 +59,7 @@ export const AddButton = styled.button`
 export const List = styled.div`
   background: ${({ theme }) => theme.colors.background};
   flex: 1;
-  overflow-y: auto;
+  overflow-y: scroll;
   overflow-x: hidden;
 `;
 
