@@ -1,10 +1,11 @@
 import styled from "@emotion/styled";
 
-export const SongContainer = styled.div`
+export const SongContainer = styled.div<{ isPlaying: boolean }>`
   display: flex;
   align-items: center;
   padding: 8px 16px;
-  background: ${({ theme }) => theme.colors.background};
+  background: ${({ theme, isPlaying }) =>
+    isPlaying ? theme.colors.activeBackground : theme.colors.background};
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
   cursor: pointer;
   transition: background-color 0.1s ease;
@@ -80,7 +81,7 @@ export const Duration = styled.div`
 export const Actions = styled.div`
   display: flex;
   gap: 8px;
-  opacity: 0;
+  opacity: 0.2;
   transition: opacity 0.2s ease;
   margin-left: 8px;
 `;
@@ -97,6 +98,15 @@ export const ActionButton = styled.button`
   &:hover {
     background: ${({ theme }) => theme.colors.hoverBackground};
     color: ${({ theme }) => theme.colors.text};
+  }
+
+  svg {
+    &:hover {
+      fill: ${({ theme }) => theme.colors.primary};
+      background: ${({ theme }) => theme.colors.hoverBackground};
+      transform: scale(1.15);
+      transition: fill 0.2s, background 0.2s, transform 0.2s;
+    }
   }
 `;
 

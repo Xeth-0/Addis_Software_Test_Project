@@ -53,6 +53,7 @@ export const SongComponent: React.FC<SongProps> = ({
       id={`song-container-${song.id}`}
       className="song-container"
       onClick={onClick}
+      isPlaying={isPlaying || false}
     >
       <SongNumber>{index + 1}</SongNumber>
 
