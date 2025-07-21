@@ -6,7 +6,7 @@ module.exports = (env, _) => {
     entry: "./src/index.tsx",
     output: {
       path: path.resolve(__dirname, "dist"),
-      filename: "bundle.js",
+      filename: "[name].[contenthash].bundle.js",
       clean: true,
     },
     resolve: {
@@ -30,6 +30,20 @@ module.exports = (env, _) => {
           test: /\.css$/i,
           use: ["style-loader", "css-loader"],
         },
+        {
+          test: /\.png$/i,
+          type: "asset/resource",
+          generator: {
+            filename: "images/[name][ext][query]",
+          },
+        },
+        { 
+          test: /\.avif$/i,
+          type: "asset/resource",
+          generator: {
+            filename: "images/[name][ext][query]",
+          },
+        },
       ],
     },
     plugins: [
@@ -38,6 +52,11 @@ module.exports = (env, _) => {
         inject: "body",
       }),
     ],
+    optimization: {
+      splitChunks: {
+        chunks: "all",
+      },
+    },
     devServer: {
       static: path.join(__dirname, "dist"),
       port: 3000,

@@ -13,6 +13,8 @@ import {
 } from "../styles/SongComponent.styles";
 import { useDispatch, useSelector } from "react-redux";
 
+import album_placeholder from "../../public/album_placeholder.avif";
+
 interface SongProps {
   song: Song;
   onClick?: () => void;
@@ -52,28 +54,26 @@ export const SongComponent: React.FC<SongProps> = ({
       onClick={onClick}
     >
       <SongNumber>{index + 1}</SongNumber>
-      <picture>
-        <source
-          srcSet={`${song.images.large} 1x, ${song.images.medium} 2x, ${song.images.small} 3x`}
-          media="(min-width: 768px)"
-        />
-        <Thumbnail
-          srcSet={`${song.images.large} 1x, ${song.images.medium} 2x, ${song.images.small} 3x`}
-          alt={`${song.album} artwork`}
-          loading="lazy"
-        />
-      </picture>
+
+      <Thumbnail
+        src={album_placeholder}
+        srcSet={`${song.images.large} 1x, ${song.images.medium} 2x, ${song.images.small} 3x`}
+        alt={`${song.album} artwork`}
+        loading="lazy"
+      />
 
       <SongInfo>
-        <Title isPlaying={isPlaying || false}>
-          {song.title}
-        </Title>
+        <Title isPlaying={isPlaying || false}>{song.title}</Title>
         <Details>
           {song.artist} • {song.album} • {song.year}
         </Details>
       </SongInfo>
       <ActionButton onClick={onFavorite} title="Favorite">
-        <Heart size={16} color={isFavorite ? "#FF5050" : "#666"} fill={isFavorite ? "#FF5959" : "none"} />
+        <Heart
+          size={16}
+          color={isFavorite ? "#FF5050" : "#666"}
+          fill={isFavorite ? "#FF5959" : "none"}
+        />
       </ActionButton>
       <Duration>{song.duration}</Duration>
       <Actions className="song-actions">
