@@ -1,6 +1,7 @@
 # Addis Software Summer Internship Test Project
 
 > Name - Tewodros Berhanu
+
 > Hosted frontend - <https://addis-software-test-project-tau.vercel.app/>
 
 This is my project submissiom for the internship program.
@@ -122,3 +123,7 @@ npm run build
 ```
 
 Both `npm run start` and `npm run build` will run the `npm run fetch-songs` script first to fetch the songs from the iTunes API and save them to `./src/mirage/data/songs.json`. (The file you see in the repo is the result of running this script. It's not really used directly by the app (it generates another file when it's run locally or in prod), it's just there as a demonstration of what the script will result in)
+
+### Testing
+
+I did not have time to write tests for the project. All testing done was manual, where i used tools like chrome dev tools, react dev tools and redux dev tools to check the state and the UI. Responsiveness was checked on different sized phone screens and different aspect ratios
