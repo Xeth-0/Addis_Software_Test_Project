@@ -4,11 +4,8 @@ import { keyframes } from "@emotion/react";
 const overlayBg = "rgba(255, 255, 255, 0.85)";
 
 export const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: ${overlayBg};
   display: flex;
   align-items: center;
