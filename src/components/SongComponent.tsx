@@ -39,7 +39,8 @@ export const SongComponent: React.FC<SongProps> = ({
     state.songs.favorites.some((favorite) => favorite.id === song.id)
   );
 
-  function onFavorite() {
+  function onFavorite(event: React.MouseEvent<HTMLButtonElement>) {
+    event.stopPropagation();
     if (isFavorite) {
       dispatch(removeFavorite(song));
     } else {
