@@ -16,6 +16,7 @@ import {
   SliderValue,
   ControlsContainer,
   ThemeToggleButton,
+  ErrorMessage,
 } from "../styles/SongList.styles";
 import { useTheme } from "../styles/theme/ThemeContext";
 
@@ -120,7 +121,7 @@ export const SongListComponent: React.FC<SongListProps> = ({
         {loading ? (
           <LoadingComponent />
         ) : error ? (
-          <div id="error-songs">Error: {error}</div>
+          <ErrorMessage id="error-songs">Error: {error}</ErrorMessage>
         ) : (
           <List id="song-list">
             {paginatedSongs.length > 0 ? (
@@ -136,7 +137,7 @@ export const SongListComponent: React.FC<SongListProps> = ({
                 />
               ))
             ) : (
-              <div>No songs found</div>
+              <ErrorMessage id="no-songs">No songs found</ErrorMessage>
             )}
           </List>
         )}

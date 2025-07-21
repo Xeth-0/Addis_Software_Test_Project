@@ -157,3 +157,15 @@ export const ThemeToggleButton = styled.button`
     display: block;
   }
 `;
+
+export const ErrorMessage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 14px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.secondaryText};
+  text-align: center;
+  padding: 16px;
+`;
