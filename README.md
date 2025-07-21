@@ -2,7 +2,8 @@
 
 > Name - Tewodros Berhanu
 
-> Hosted frontend - <https://addis-software-test-project-tau.vercel.app/>
+> Hosted frontend - <https://addis-software-test-project-tau.vercel.app/> or <https://addis-software-test-project-xetho.vercel.app/>
+> Github repo - <https://github.com/Xeth-0/Addis_Software_Test_Project>
 
 This is my project submissiom for the internship program.
 The app is a simple react app that uses Mirage.js as the backend mock, with a list of songs obtained from apple music public API.
