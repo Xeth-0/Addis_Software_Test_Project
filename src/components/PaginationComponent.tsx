@@ -73,7 +73,7 @@ export const PaginationComponent: React.FC<PaginationProps> = ({
             </Button>
           )}
 
-          {totalPages > 1 && (
+          {totalPages > 1 && totalPages > 3 && (
             <Button onClick={() => onPageChange(totalPages)}>
               {totalPages}
             </Button>
