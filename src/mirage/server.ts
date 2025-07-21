@@ -1,5 +1,4 @@
 import { createServer, Model } from "miragejs";
-import { mockSongs } from "./data/songsMockData";
 import songs from "./data/songs.json";
 
 export function makeServer({ environment = "development" } = {}) {
@@ -14,11 +13,16 @@ export function makeServer({ environment = "development" } = {}) {
     seeds(server) {
       const transformedSongs = songs.map((song: any) => ({
         id: song.id,
-        title: song.name, // Map 'name' to 'title'
+        title: song.name,
         artist: song.artist,
         album: song.album,
         year: song.year,
-        thumbnail: song.artwork, // Map 'artwork' to 'thumbnail'
+        images: {
+          small: song.images.small,
+          medium: song.images.medium,
+          large: song.images.large,
+        },
+        previewUrl: song.previewUrl,
         duration: formatDuration(song.duration), // Convert number to string format
       }));
       

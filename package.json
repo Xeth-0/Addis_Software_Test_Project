@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "fetch-songs": "npx ts-node --transpile-only src/mirage/data/fetch-songs.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack serve --mode development",
-    "build": "webpack --mode production"
+    "start": "npm run fetch-songs && webpack serve --mode development",
+    "build": "npm run fetch-songs && webpack --mode production"
   },
   "keywords": [],
   "author": "Tewodros Berhanu",
@@ -17,6 +18,7 @@
     "axios": "^1.10.0",
     "fs": "^0.0.1-security",
     "graceful-fs": "^4.2.11",
+    "lucide-react": "^0.525.0",
     "node-fetch": "^3.3.2",
     "path": "^0.12.7",
     "react": "^19.1.0",

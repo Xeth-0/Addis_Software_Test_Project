@@ -16,10 +16,15 @@ async function fetchITunesTop100() {
       year: new Date(e["im:releaseDate"]?.label).getFullYear(),
       previewUrl: e?.link?.find((l: any) => l.attributes.rel === "alternate")
         ?.attributes.href,
-      artwork: e["im:image"][2].label,
+      images: {
+        small: e["im:image"][0].label,
+        medium: e["im:image"][1].label,
+        large: e["im:image"][2].label,
+      },
       price: e["im:price"].label,
       genre: e?.category?.attributes?.term,
-      //   ?.attributes.imDuration,
+      link: e?.link?.find((l: any) => l.attributes.rel === "alternate")
+        ?.attributes.href,
       duration: e?.link[1]["im:duration"]?.label,
     }));
   }
@@ -104,7 +109,11 @@ async function fetchAlbumSongs(
       album: result.collectionName,
       year: new Date(result.releaseDate).getFullYear(),
       previewUrl: result.previewUrl,
-      artwork: result.artworkUrl100,
+      images: {
+        small: result.artworkUrl60,
+        medium: result.artworkUrl100,
+        large: result.artworkUrl100,
+      },
       price: result.trackPrice,
       genre: result.primaryGenreName,
       duration: result.trackTimeMillis,
