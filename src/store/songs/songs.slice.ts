@@ -84,6 +84,12 @@ const songsSlice = createSlice({
       if (index !== -1) {
         state.list[index] = action.payload;
       }
+      
+      // Update currently playing song if it matches the updated song
+      if (state.playing?.id === action.payload.id) {
+        state.playing = action.payload;
+      }
+      
       state.loading = false;
     },
     updateSongFailure(state, action: PayloadAction<string>) {
@@ -99,6 +105,16 @@ const songsSlice = createSlice({
     deleteSongSuccess(state, action: PayloadAction<string>) {
       state.list = state.list.filter((song) => song.id !== action.payload);
       state.loading = false;
+
+      // delete the song from favorites if it's in there
+      state.favorites = state.favorites.filter(
+        (song) => song.id !== action.payload
+      );
+      
+      // Clear currently playing song if it matches the deleted song
+      if (state.playing?.id === action.payload) {
+        state.playing = null;
+      }
     },
     deleteSongFailure(state, action: PayloadAction<string>) {
       state.loading = false;

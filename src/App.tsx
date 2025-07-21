@@ -1,5 +1,5 @@
 import "./index.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Menu, Sun, Moon } from "lucide-react";
 
@@ -8,6 +8,8 @@ import {
   deleteSongRequest,
   Song,
   updateSongRequest,
+  setPlaying,
+  RootState,
 } from "./store";
 import {
   SongListComponent,
@@ -29,11 +31,11 @@ const App = () => {
   const [activeNav, setActiveNav] = useState<string>("library");
   const [editingSong, setEditingSong] = useState<Song | undefined>(undefined);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const [nowPlaying, setNowPlaying] = useState<Song | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
   const dispatch = useDispatch();
+  const nowPlaying = useSelector((state: RootState) => state.songs.playing);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -73,7 +75,7 @@ const App = () => {
   };
 
   const handlePlaySong = (song: Song) => {
-    setNowPlaying(song);
+    dispatch(setPlaying(song));
     setIsPlaying(true);
   };
 
