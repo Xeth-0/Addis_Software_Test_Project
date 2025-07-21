@@ -16,7 +16,6 @@ function getArtworkUrl(url: string, size: number) {
   );
 }
 
-
 async function fetchITunesTop100() {
   function formatItunesSongs(json: any) {
     return json.feed.entry.map((e: any) => ({
@@ -156,7 +155,8 @@ async function fetchAlbumSongs(
     .filter((result): result is any[] => result !== null)
     .flat();
 
-  const songs = [...albumSongs, ...top100Songs];
+  // the .reverse is a hack to make sure newly created songs are at the top later. Check the mirage server.ts for more.
+  const songs = [...top100Songs.reverse(), ...albumSongs.reverse()];
 
   // Saving the results to a json file.
   fs.writeFileSync(

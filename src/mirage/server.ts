@@ -38,7 +38,9 @@ export function makeServer({ environment = "development" } = {}) {
 
         if (limit) {
           const offset = (page - 1) * limit;
-          const paginatedSongs = schema.db.songs.slice(offset, offset + limit);
+          
+          // Reverse - Hack because mirage has no way to sort songs. This will let me have newly created songs at the top of the list(better for demo)
+          const paginatedSongs = schema.db.songs.reverse().slice(offset, offset + limit);
 
           return {
             songs: paginatedSongs,
