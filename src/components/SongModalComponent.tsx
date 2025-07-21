@@ -22,7 +22,7 @@ interface SongModalProps {
   onSave: (song: Omit<Song, "id">) => void;
 }
 
-export const SongModal: React.FC<SongModalProps> = ({
+export const SongModalComponent: React.FC<SongModalProps> = ({
   song,
   isOpen,
   onClose,

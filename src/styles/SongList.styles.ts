@@ -8,7 +8,7 @@ export const SongListContainer = styled.div`
   margin: 0 auto;
   background: white;
   border-radius: 8px;
-  overflow: hidden;
+  overflow-y: scroll;
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 768px) {

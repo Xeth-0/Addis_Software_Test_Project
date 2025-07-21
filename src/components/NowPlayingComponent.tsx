@@ -26,7 +26,7 @@ interface NowPlayingBarProps {
   onNext: () => void;
 }
 
-export const NowPlayingBar: React.FC<NowPlayingBarProps> = ({
+export const NowPlayingComponent: React.FC<NowPlayingBarProps> = ({
   song,
   isPlaying,
   currentTime,

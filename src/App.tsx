@@ -1,45 +1,29 @@
 import "./index.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { Menu } from "lucide-react";
+
 import {
   addSongRequest,
   deleteSongRequest,
-  RootState,
+  Song,
   updateSongRequest,
 } from "./store";
-import { useState } from "react";
-import { Song } from "./store";
-import { SongList } from "./components/SongList";
-import { SongModal } from "./components/SongModal";
-import { NowPlayingBar } from "./components/NowPlaying";
-import { SONGS_PER_PAGE } from "./constants";
-
 import {
-  Menu,
-  Music,
-  Heart,
-  Settings,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+  SongListComponent,
+  SongModalComponent,
+  NowPlayingComponent,
+  SidebarComponent,
+} from "./components";
 import {
   AppContainer,
-  Sidebar,
-  SidebarHeader,
-  AppTitle,
-  ToggleButton,
-  SidebarNav,
-  NavSection,
-  SectionTitle,
-  NavItem,
-  NavText,
   MainContent,
   ContentArea,
-  SongListWrapper,
-  PaginationWrapper,
   PlayerWrapper,
   MobileOverlay,
   MobileToggle,
 } from "./styles/App.styles";
+import { SONGS_PER_PAGE } from "./constants";
 
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -48,6 +32,7 @@ const App = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [nowPlaying, setNowPlaying] = useState<Song | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [songsPerPage, setSongsPerPage] = useState(SONGS_PER_PAGE || 50);
 
   const dispatch = useDispatch();
 
@@ -109,78 +94,17 @@ const App = () => {
           onClick={() => setIsSidebarCollapsed(true)}
         />
 
-        <Sidebar isCollapsed={isSidebarCollapsed}>
-          <SidebarHeader
-            className="sidebar-header"
-            isCollapsed={isSidebarCollapsed}
-          >
-            <AppTitle className="app-title" isCollapsed={isSidebarCollapsed}>
-              Music App
-            </AppTitle>
-            <ToggleButton onClick={toggleSidebar}>
-              {isSidebarCollapsed ? (
-                <ChevronRight size={16} />
-              ) : (
-                <ChevronLeft size={16} />
-              )}
-            </ToggleButton>
-          </SidebarHeader>
-
-          <SidebarNav>
-            <NavSection>
-              <SectionTitle isCollapsed={isSidebarCollapsed}>
-                Music
-              </SectionTitle>
-              <NavItem
-                active={activeNav === "library"}
-                isCollapsed={isSidebarCollapsed}
-                onClick={() => setActiveNav("library")}
-              >
-                <span>
-                  <Music size={20} />
-                </span>
-                {!isSidebarCollapsed && (
-                  <NavText isCollapsed={false}>Library</NavText>
-                )}
-              </NavItem>
-              <NavItem
-                active={activeNav === "favorites"}
-                isCollapsed={isSidebarCollapsed}
-                onClick={() => setActiveNav("favorites")}
-              >
-                <span>
-                  <Heart size={20} />
-                </span>
-                {!isSidebarCollapsed && (
-                  <NavText isCollapsed={false}>Favorites</NavText>
-                )}
-              </NavItem>
-            </NavSection>
-
-            <NavSection>
-              <SectionTitle isCollapsed={isSidebarCollapsed}>
-                Settings
-              </SectionTitle>
-              <NavItem
-                active={activeNav === "settings"}
-                isCollapsed={isSidebarCollapsed}
-                onClick={() => setActiveNav("settings")}
-              >
-                <span>
-                  <Settings size={20} />
-                </span>
-                {!isSidebarCollapsed && (
-                  <NavText isCollapsed={false}>Settings</NavText>
-                )}
-              </NavItem>
-            </NavSection>
-          </SidebarNav>
-        </Sidebar>
+        <SidebarComponent
+          isSidebarCollapsed={isSidebarCollapsed}
+          toggleSidebar={toggleSidebar}
+          activeNav={activeNav}
+          setActiveNav={setActiveNav}
+        />
 
         <MainContent>
           <ContentArea className="content-area">
             {/* <SongListWrapper> */}
-            <SongList
+            <SongListComponent
               title={
                 activeNav === "library"
                   ? "Library"
@@ -198,7 +122,7 @@ const App = () => {
           </ContentArea>
 
           <PlayerWrapper>
-            <NowPlayingBar
+            <NowPlayingComponent
               song={nowPlaying}
               isPlaying={isPlaying}
               currentTime={0}
@@ -210,7 +134,7 @@ const App = () => {
           </PlayerWrapper>
         </MainContent>
 
-        <SongModal
+        <SongModalComponent
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           song={editingSong}

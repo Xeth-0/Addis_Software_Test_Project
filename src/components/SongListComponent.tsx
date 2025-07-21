@@ -12,9 +12,9 @@ import {
   AddButton,
   List,
 } from "../styles/SongList.styles";
-import LoadingComponent from "./Loading";
+import LoadingComponent from "./LoadingComponent";
 import { PaginationWrapper } from "../styles/App.styles";
-import { Pagination } from "./Pagination";
+import { PaginationComponent } from "./PaginationComponent";
 
 interface SongListProps {
   title?: string;
@@ -25,7 +25,7 @@ interface SongListProps {
   currentlyPlaying: Song | null;
 }
 
-export const SongList: React.FC<SongListProps> = ({
+export const SongListComponent: React.FC<SongListProps> = ({
   title = "Songs",
   onAddSong,
   onPlaySong,
@@ -79,7 +79,7 @@ export const SongList: React.FC<SongListProps> = ({
         </List>
       </SongListContainer>
       <PaginationWrapper>
-        <Pagination
+        <PaginationComponent
           currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={setCurrentPage}
