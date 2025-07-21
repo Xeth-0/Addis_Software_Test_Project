@@ -6,14 +6,13 @@ import {
   RootState,
   updateSongRequest,
 } from "./store";
-import { useEffect, useState } from "react";
-import { fetchSongsRequest, Song } from "./store";
+import { useState } from "react";
+import { Song } from "./store";
 import { SongList } from "./components/SongList";
 import { SongModal } from "./components/SongModal";
-import LoadingComponent from "./components/Loading";
-import { Pagination } from "./components/Pagination";
 import { NowPlayingBar } from "./components/NowPlaying";
 import { SONGS_PER_PAGE } from "./constants";
+
 import { 
   Menu, 
   Music, 
@@ -43,14 +42,6 @@ import {
 } from "./styles/App.styles";
 
 const App = () => {
-  const songs = useSelector((state: RootState) => state.songs.list);
-  const loading = useSelector((state: RootState) => state.songs.loading);
-  const error = useSelector((state: RootState) => state.songs.error);
-  const total = useSelector((state: RootState) => state.songs.total);
-  const page = useSelector((state: RootState) => state.songs.page);
-  const limit = useSelector((state: RootState) => state.songs.limit);
-
-  const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeNav, setActiveNav] = useState<string>("library");
   const [editingSong, setEditingSong] = useState<Song | undefined>(undefined);
@@ -59,18 +50,6 @@ const App = () => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchSongsRequest({ limit: SONGS_PER_PAGE, page: currentPage }));
-  }, [currentPage, dispatch]);
-  
-  if (loading) {
-    return <LoadingComponent />;
-  } else if (error) {
-    return <div id="error-songs">Error: {error}</div>;
-  }
-  
-  const totalPages = limit ? Math.ceil(total / limit) : 1;
 
   const handleSaveSong = (songData: Omit<Song, "id">) => {
     if (editingSong) {
@@ -175,28 +154,16 @@ const App = () => {
 
         <MainContent>
           <ContentArea>
-            <SongListWrapper>
+            {/* <SongListWrapper> */}
               <SongList
                 title={activeNav === "library" ? "Library" : activeNav === "favorites" ? "Favorites" : "Settings"}
-                songs={songs}
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={setCurrentPage}
                 onPlaySong={handlePlaySong}
                 onAddSong={handleAddSong}
                 onEditSong={handleEditSong}
                 onDeleteSong={handleDeleteSong}
                 currentlyPlaying={nowPlaying}
               />
-            </SongListWrapper>
-
-            <PaginationWrapper>
-              <Pagination
-                currentPage={page}
-                totalPages={totalPages}
-                onPageChange={setCurrentPage}
-              />
-            </PaginationWrapper>
+            {/* </SongListWrapper> */}
           </ContentArea>
 
           <PlayerWrapper>

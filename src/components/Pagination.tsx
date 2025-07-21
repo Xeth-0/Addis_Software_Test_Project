@@ -1,10 +1,6 @@
 import React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import {
-  Container,
-  Button,
-  PageInfo,
-} from "../styles/Pagination.styles";
+import { Container, Button, PageInfo } from "../styles/Pagination.styles";
 
 interface PaginationProps {
   currentPage: number;
@@ -29,6 +25,10 @@ export const Pagination: React.FC<PaginationProps> = ({
 
       {totalPages > 1 && (
         <>
+          {currentPage > 2 && (
+            <Button onClick={() => onPageChange(1)}>1</Button>
+          )}
+
           {currentPage > 1 && (
             <Button onClick={() => onPageChange(currentPage - 1)}>
               {currentPage - 1}
