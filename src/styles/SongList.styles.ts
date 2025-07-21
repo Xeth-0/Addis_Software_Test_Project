@@ -19,6 +19,7 @@ export const SongListContainer = styled.div`
 
 export const Header = styled.div`
   padding: 16px;
+  height: 5vh;
   background: #f8f8f8;
   border-bottom: 1px solid #e5e5e5;
   font-size: 16px;

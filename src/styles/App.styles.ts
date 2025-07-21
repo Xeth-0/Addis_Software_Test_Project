@@ -31,6 +31,7 @@ export const SidebarHeader = styled.div<{ isCollapsed: boolean }>`
   align-items: center;
   justify-content: ${(props) => (props.isCollapsed ? "center" : "space-between")};
   padding: 16px;
+  height: 5vh;
   border-bottom: 1px solid #e5e7eb;
   background: #fff;
 `;
@@ -120,8 +121,7 @@ export const ContentArea = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: 20px;
-  padding-bottom: 0;
+  padding: 0;
 
   @media (max-width: 768px) {
     padding: 10px;

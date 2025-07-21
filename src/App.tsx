@@ -13,13 +13,13 @@ import { SongModal } from "./components/SongModal";
 import { NowPlayingBar } from "./components/NowPlaying";
 import { SONGS_PER_PAGE } from "./constants";
 
-import { 
-  Menu, 
-  Music, 
-  Heart, 
-  Settings, 
-  ChevronLeft, 
-  ChevronRight 
+import {
+  Menu,
+  Music,
+  Heart,
+  Settings,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import {
   AppContainer,
@@ -104,65 +104,96 @@ const App = () => {
           <Menu size={20} />
         </MobileToggle>
 
-        <MobileOverlay 
-          isVisible={!isSidebarCollapsed} 
-          onClick={() => setIsSidebarCollapsed(true)} 
+        <MobileOverlay
+          isVisible={!isSidebarCollapsed}
+          onClick={() => setIsSidebarCollapsed(true)}
         />
 
         <Sidebar isCollapsed={isSidebarCollapsed}>
-          <SidebarHeader isCollapsed={isSidebarCollapsed}>
-            <AppTitle isCollapsed={isSidebarCollapsed}>Music App</AppTitle>
+          <SidebarHeader
+            className="sidebar-header"
+            isCollapsed={isSidebarCollapsed}
+          >
+            <AppTitle className="app-title" isCollapsed={isSidebarCollapsed}>
+              Music App
+            </AppTitle>
             <ToggleButton onClick={toggleSidebar}>
-              {isSidebarCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+              {isSidebarCollapsed ? (
+                <ChevronRight size={16} />
+              ) : (
+                <ChevronLeft size={16} />
+              )}
             </ToggleButton>
           </SidebarHeader>
 
           <SidebarNav>
             <NavSection>
-              <SectionTitle isCollapsed={isSidebarCollapsed}>Music</SectionTitle>
-              <NavItem 
-                active={activeNav === "library"} 
+              <SectionTitle isCollapsed={isSidebarCollapsed}>
+                Music
+              </SectionTitle>
+              <NavItem
+                active={activeNav === "library"}
                 isCollapsed={isSidebarCollapsed}
                 onClick={() => setActiveNav("library")}
               >
-                <Music size={20} />
-                <NavText isCollapsed={isSidebarCollapsed}>Library</NavText>
+                <span>
+                  <Music size={20} />
+                </span>
+                {!isSidebarCollapsed && (
+                  <NavText isCollapsed={false}>Library</NavText>
+                )}
               </NavItem>
-              <NavItem 
-                active={activeNav === "favorites"} 
+              <NavItem
+                active={activeNav === "favorites"}
                 isCollapsed={isSidebarCollapsed}
                 onClick={() => setActiveNav("favorites")}
               >
-                <Heart size={20} />
-                <NavText isCollapsed={isSidebarCollapsed}>Favorites</NavText>
+                <span>
+                  <Heart size={20} />
+                </span>
+                {!isSidebarCollapsed && (
+                  <NavText isCollapsed={false}>Favorites</NavText>
+                )}
               </NavItem>
             </NavSection>
 
             <NavSection>
-              <SectionTitle isCollapsed={isSidebarCollapsed}>Settings</SectionTitle>
-              <NavItem 
-                active={activeNav === "settings"} 
+              <SectionTitle isCollapsed={isSidebarCollapsed}>
+                Settings
+              </SectionTitle>
+              <NavItem
+                active={activeNav === "settings"}
                 isCollapsed={isSidebarCollapsed}
                 onClick={() => setActiveNav("settings")}
               >
-                <Settings size={20} />
-                <NavText isCollapsed={isSidebarCollapsed}>Settings</NavText>
+                <span>
+                  <Settings size={20} />
+                </span>
+                {!isSidebarCollapsed && (
+                  <NavText isCollapsed={false}>Settings</NavText>
+                )}
               </NavItem>
             </NavSection>
           </SidebarNav>
         </Sidebar>
 
         <MainContent>
-          <ContentArea>
+          <ContentArea className="content-area">
             {/* <SongListWrapper> */}
-              <SongList
-                title={activeNav === "library" ? "Library" : activeNav === "favorites" ? "Favorites" : "Settings"}
-                onPlaySong={handlePlaySong}
-                onAddSong={handleAddSong}
-                onEditSong={handleEditSong}
-                onDeleteSong={handleDeleteSong}
-                currentlyPlaying={nowPlaying}
-              />
+            <SongList
+              title={
+                activeNav === "library"
+                  ? "Library"
+                  : activeNav === "favorites"
+                  ? "Favorites"
+                  : "Settings"
+              }
+              onPlaySong={handlePlaySong}
+              onAddSong={handleAddSong}
+              onEditSong={handleEditSong}
+              onDeleteSong={handleDeleteSong}
+              currentlyPlaying={nowPlaying}
+            />
             {/* </SongListWrapper> */}
           </ContentArea>
 
