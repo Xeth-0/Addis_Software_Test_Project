@@ -34,7 +34,7 @@ The main store can be found in `./src/store/store.ts` and `./src/store/songs/` h
 - [x] List of paginated songs, with offset based pagination that is backend driven. (backend only serves songs on the current page until we change the page on the UI)
 - [x] Redux-toolkit and Redux-Saga for state management
 - [x] Emotion/Syled styling with light and dark themes
-- [x] Locally stored list of favorite songs and a favorites songs list using react local state (useState - *another requirement* ).
+- [x] Locally stored list of favorite songs and a favorites songs list using react local state (not using backend(mirage) for this).
 - [x] Placeholder image served from the public folder (loaded as an image using webpack - *one of the requirements specified is special file specific rules for webpack*)
 - [x] Environment variables for the API base url, defined in `.env` file and loaded using `dotenv-webpack` plugin (setup in `webpack.config.js`).
 - [x] Collapsible sidebar for navigation and showing song metadata
@@ -119,6 +119,7 @@ npm run start
 ### Production
 
 ```bash
+npm install
 npm run build
 ```
 
