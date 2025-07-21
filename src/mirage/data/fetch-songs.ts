@@ -142,6 +142,7 @@ async function fetchAlbumSongs(
     { title: "To Pimp a Butterfly", artist: "Kendrick Lamar" },
     { title: "Take Care", artist: "Drake" },
     { title: "Good Kid, M.A.A.D City", artist: "Kendrick Lamar" },
+    { title: "ADHD2", artist: "Joyner Lucas" },
   ];
 
   // Start with the albums, then do the top 100.

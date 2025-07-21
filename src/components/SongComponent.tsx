@@ -59,8 +59,13 @@ export const SongComponent: React.FC<SongProps> = ({
 
       <Thumbnail
         src={album_placeholder}
-        srcSet={`${song.images.large} 1x, ${song.images.medium} 2x, ${song.images.small} 3x`}
+        srcSet={`${song.images.large} 1x, ${song.images.medium} 2x, ${song.images.small} 3x` || `${album_placeholder} 1x`}
         alt={`${song.album} artwork`}
+        onError={(e) => {
+          e.currentTarget.onerror = null;
+          e.currentTarget.src = album_placeholder;
+          e.currentTarget.srcset = `${album_placeholder} 1x`;
+        }}
         loading="lazy"
       />
 

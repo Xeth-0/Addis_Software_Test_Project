@@ -70,7 +70,7 @@ module.exports = (env, _) => {
     devServer: {
       static: path.join(__dirname, "dist"),
       port: 3000,
-      open: true,
+      open: false,
       hot: true,
     },
   };
