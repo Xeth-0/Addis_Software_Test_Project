@@ -104,7 +104,7 @@ export const TimeDisplay = styled.div`
   font-size: 11px;
   color: #666;
   margin-top: 4px;
-`; 
+`;
 
 export const NowPlayingSidebarContainer = styled.div`
   display: flex;
@@ -136,23 +136,46 @@ export const NowPlayingSidebarContainerMetadata = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  gap: 4px;
+  overflow: hidden;
+
+  span {
+    width: max-content;
+    width: 90%;
+    text-align: center;
+    white-space: nowrap;
+    display: block;
+  }
 
   #now-playing-sidebar-container-metadata-title {
     font-size: 16px;
     font-weight: 600;
     color: #000;
-    overflow: scroll;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    &::-webkit-scrollbar {
-      display: none;
-    }
-    white-space: nowrap;
   }
 
   #now-playing-sidebar-container-metadata-artist {
     font-size: 14px;
     color: #666;
+    font-weight: 500;
   }
 
-`
+  #now-playing-sidebar-container-metadata-album {
+    font-size: 13px;
+    color: #888;
+  }
+
+  #now-playing-sidebar-container-metadata-year {
+    font-size: 12px;
+    color: #aaa;
+  }
+
+  @keyframes scroll-text {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(var(--scroll-distance));
+    }
+  }
+`;

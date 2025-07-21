@@ -19,6 +19,34 @@ import {
   NowPlayingSidebarContainerArtwork,
   NowPlayingSidebarContainerMetadata,
 } from "../styles/NowPlaying.styles";
+import { useEffect, useRef } from "react";
+
+// Minimal hook for scrolling text on overflow
+const useScrollingText = (text: string) => {
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const parentElement = el.parentElement;
+    if (!parentElement) return;
+
+    const isOverflowing = el.scrollWidth > parentElement.offsetWidth;
+    if (isOverflowing) {
+      // Remove text-align: center to allow scrolling text to align left
+      const distance = el.scrollWidth - parentElement.offsetWidth + 20;
+      el.style.animation = `scroll-text 4s infinite alternate ease-in-out`;
+      el.style.setProperty("--scroll-distance", `-${distance}px`);
+      el.style.textAlign = "left";
+    } else {
+      el.style.animation = "none";
+      el.style.textAlign = "center";
+    }
+  }, [text]);
+
+  return ref;
+};
 
 interface SidebarComponentProps {
   isSidebarCollapsed: boolean;
@@ -35,6 +63,11 @@ export const SidebarComponent = ({
   setActiveNav,
   nowPlaying,
 }: SidebarComponentProps) => {
+  const titleRef = useScrollingText(nowPlaying?.title || "");
+  const artistRef = useScrollingText(nowPlaying?.artist || "");
+  const albumRef = useScrollingText(nowPlaying?.album || "");
+  const yearRef = useScrollingText(nowPlaying?.year?.toString() || "");
+
   return (
     <Sidebar isCollapsed={isSidebarCollapsed}>
       <SidebarHeader
@@ -94,16 +127,28 @@ export const SidebarComponent = ({
                 />
               </NowPlayingSidebarContainerArtwork>
               <NowPlayingSidebarContainerMetadata className="now-playing-sidebar-container-metadata">
-                <span id="now-playing-sidebar-container-metadata-title">
+                <span
+                  id="now-playing-sidebar-container-metadata-title"
+                  ref={titleRef}
+                >
                   {nowPlaying.title}
                 </span>
-                <span id="now-playing-sidebar-container-metadata-artist">
+                <span
+                  id="now-playing-sidebar-container-metadata-artist"
+                  ref={artistRef}
+                >
                   {nowPlaying.artist}
                 </span>
-                <span id="now-playing-sidebar-container-metadata-album">
+                <span
+                  id="now-playing-sidebar-container-metadata-album"
+                  ref={albumRef}
+                >
                   {nowPlaying.album}
                 </span>
-                <span id="now-playing-sidebar-container-metadata-year">
+                <span
+                  id="now-playing-sidebar-container-metadata-year"
+                  ref={yearRef}
+                >
                   {nowPlaying.year}
                 </span>
               </NowPlayingSidebarContainerMetadata>
