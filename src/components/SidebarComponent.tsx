@@ -76,19 +76,7 @@ export const SidebarComponent = ({
         </NavSection>
 
         <NavSection>
-          <SectionTitle isCollapsed={isSidebarCollapsed}>Settings</SectionTitle>
-          <NavItem
-            active={activeNav === "settings"}
-            isCollapsed={isSidebarCollapsed}
-            onClick={() => setActiveNav("settings")}
-          >
-            <span>
-              <Settings size={20} />
-            </span>
-            {!isSidebarCollapsed && (
-              <NavText isCollapsed={false}>Settings</NavText>
-            )}
-          </NavItem>
+          
         </NavSection>
       </SidebarNav>
     </Sidebar>
