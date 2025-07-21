@@ -14,6 +14,7 @@ import {
   SliderLabel,
   SliderInput,
   SliderValue,
+  ControlsContainer,
 } from "../styles/SongList.styles";
 
 import { SongComponent } from "./SongComponent";
@@ -62,28 +63,30 @@ export const SongListComponent: React.FC<SongListProps> = ({
       <SongListContainer id="song-list-container">
         <Header id="song-list-header">
           <Title>{title}</Title>
+        </Header>
+
+        <ControlsContainer>
+          <SliderContainer>
+            <SliderWrapper>
+              <SliderLabel>Songs per page</SliderLabel>
+              <SliderInput
+                type="range"
+                min={10}
+                max={100}
+                step={10}
+                value={songsPerPage}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setSongsPerPage(parseInt(e.target.value))
+                }
+              />
+              <SliderValue>{songsPerPage}</SliderValue>
+            </SliderWrapper>
+          </SliderContainer>
           <AddButton id="add-song-button" onClick={onAddSong}>
             <Plus size={16} />
             Add Song
           </AddButton>
-        </Header>
-
-        <SliderContainer>
-          <SliderWrapper>
-            <SliderLabel>Songs per page</SliderLabel>
-            <SliderInput
-              type="range"
-              min={10}
-              max={100}
-              step={10}
-              value={songsPerPage}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setSongsPerPage(parseInt(e.target.value))
-              }
-            />
-            <SliderValue>{songsPerPage}</SliderValue>
-          </SliderWrapper>
-        </SliderContainer>
+        </ControlsContainer>
 
         {loading ? (
           <LoadingComponent />

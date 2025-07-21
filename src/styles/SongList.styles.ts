@@ -63,6 +63,16 @@ export const List = styled.div`
   overflow-x: hidden;
 `;
 
+export const ControlsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #fafafa;
+  border-bottom: 1px solid #e5e5e5;
+  flex-wrap: wrap;
+`;
+
 export const SliderContainer = styled.div`
   padding: 12px 16px;
   background: #fafafa;

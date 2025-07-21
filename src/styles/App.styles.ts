@@ -65,6 +65,9 @@ export const ToggleButton = styled.button`
 export const SidebarNav = styled.nav`
   flex: 1;
   padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 export const NavSection = styled.div`
