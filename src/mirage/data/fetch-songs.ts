@@ -6,6 +6,17 @@ import fs from "fs";
 import path from "path";
 import fetch from "node-fetch";
 
+function getArtworkUrl(url: string, size: number) {
+  // GPT Generated (slightly improved by me). Apple music returns 3 images of pre-determined resolutions.
+  // These are quite small, and I found that replacing the size with a larger one works directly from their API.
+  // This function replaces the size of the image in the url of the API response with another one.
+  return url.replace(
+    /\/\d+x\d+bb\.(png|jpg|jpeg|gif|svg|webp)$/,
+    `/${size}x${size}bb.$1`
+  );
+}
+
+
 async function fetchITunesTop100() {
   function formatItunesSongs(json: any) {
     return json.feed.entry.map((e: any) => ({
@@ -17,9 +28,9 @@ async function fetchITunesTop100() {
       previewUrl: e?.link?.find((l: any) => l.attributes.rel === "alternate")
         ?.attributes.href,
       images: {
-        small: e["im:image"][0].label,
-        medium: e["im:image"][1].label,
-        large: e["im:image"][2].label,
+        small: getArtworkUrl(e["im:image"][0].label, 60),
+        medium: getArtworkUrl(e["im:image"][1].label, 420),
+        large: getArtworkUrl(e["im:image"][2].label, 560),
       },
       price: e["im:price"].label,
       genre: e?.category?.attributes?.term,
@@ -110,9 +121,9 @@ async function fetchAlbumSongs(
       year: new Date(result.releaseDate).getFullYear(),
       previewUrl: result.previewUrl,
       images: {
-        small: result.artworkUrl60,
-        medium: result.artworkUrl100,
-        large: result.artworkUrl100,
+        small: getArtworkUrl(result.artworkUrl60, 60),
+        medium: getArtworkUrl(result.artworkUrl100, 420),
+        large: getArtworkUrl(result.artworkUrl100, 560),
       },
       price: result.trackPrice,
       genre: result.primaryGenreName,

@@ -102,6 +102,7 @@ const App = () => {
           toggleSidebar={toggleSidebar}
           activeNav={activeNav}
           setActiveNav={setActiveNav}
+          nowPlaying={nowPlaying}
         />
 
         <MainContent>

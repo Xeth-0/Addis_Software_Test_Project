@@ -13,13 +13,19 @@ import { ChevronRight } from "lucide-react";
 import { ChevronLeft } from "lucide-react";
 import { Music } from "lucide-react";
 import { Heart } from "lucide-react";
-import { Settings } from "lucide-react";
+import { Song } from "../store";
+import {
+  NowPlayingSidebarContainer,
+  NowPlayingSidebarContainerArtwork,
+  NowPlayingSidebarContainerMetadata,
+} from "../styles/NowPlaying.styles";
 
 interface SidebarComponentProps {
   isSidebarCollapsed: boolean;
   toggleSidebar: () => void;
   activeNav: string;
   setActiveNav: (nav: string) => void;
+  nowPlaying: Song | null;
 }
 
 export const SidebarComponent = ({
@@ -27,6 +33,7 @@ export const SidebarComponent = ({
   toggleSidebar,
   activeNav,
   setActiveNav,
+  nowPlaying,
 }: SidebarComponentProps) => {
   return (
     <Sidebar isCollapsed={isSidebarCollapsed}>
@@ -74,9 +81,34 @@ export const SidebarComponent = ({
             )}
           </NavItem>
         </NavSection>
-
         <NavSection>
-          
+          {nowPlaying && (
+            <NowPlayingSidebarContainer className="now-playing-sidebar-container">
+              <NowPlayingSidebarContainerArtwork className="now-playing-sidebar-container-artwork">
+                <img
+                  src={nowPlaying.images.large || nowPlaying.images.small || ""}
+                  srcSet={`${nowPlaying.images.small} 60w, ${nowPlaying.images.medium} 420w, ${nowPlaying.images.large} 560w`}
+                  sizes="(max-width: 600px) 60px, (max-width: 1024px) 420px, 560px"
+                  alt="now-playing"
+                  loading="lazy"
+                />
+              </NowPlayingSidebarContainerArtwork>
+              <NowPlayingSidebarContainerMetadata className="now-playing-sidebar-container-metadata">
+                <span id="now-playing-sidebar-container-metadata-title">
+                  {nowPlaying.title}
+                </span>
+                <span id="now-playing-sidebar-container-metadata-artist">
+                  {nowPlaying.artist}
+                </span>
+                <span id="now-playing-sidebar-container-metadata-album">
+                  {nowPlaying.album}
+                </span>
+                <span id="now-playing-sidebar-container-metadata-year">
+                  {nowPlaying.year}
+                </span>
+              </NowPlayingSidebarContainerMetadata>
+            </NowPlayingSidebarContainer>
+          )}
         </NavSection>
       </SidebarNav>
     </Sidebar>

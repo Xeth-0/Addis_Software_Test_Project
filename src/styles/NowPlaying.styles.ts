@@ -105,3 +105,54 @@ export const TimeDisplay = styled.div`
   color: #666;
   margin-top: 4px;
 `; 
+
+export const NowPlayingSidebarContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  gap: 12px;
+`;
+
+export const NowPlayingSidebarContainerArtwork = styled.div`
+  width: 100%;
+  display: flex;
+  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
+  padding: 1%;
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    display: block;
+    object-fit: cover;
+  }
+`;
+
+export const NowPlayingSidebarContainerMetadata = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  #now-playing-sidebar-container-metadata-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    overflow: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    white-space: nowrap;
+  }
+
+  #now-playing-sidebar-container-metadata-artist {
+    font-size: 14px;
+    color: #666;
+  }
+
+`
