@@ -1,96 +1,16 @@
-import styled from "@emotion/styled";
-import { Song } from "../store";
 import { Edit, Edit2, Play, Trash } from "lucide-react";
-
-const SongContainer = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 8px 16px;
-  background: white;
-  border-bottom: 1px solid #e5e5e5;
-  cursor: pointer;
-  transition: background-color 0.1s ease;
-  position: relative;
-
-  &:last-child {
-    border-bottom: none;
-  }
-
-  &:hover {
-    background: #f7f7f7;
-
-    .song-actions {
-      opacity: 1;
-    }
-  }
-
-  &:active {
-    background: #e8e8e8;
-  }
-`;
-
-const Thumbnail = styled.img`
-  width: 44px;
-  height: 44px;
-  border-radius: 4px;
-  margin-right: 12px;
-  object-fit: cover;
-  flex-shrink: 0;
-`;
-
-const SongInfo = styled.div`
-  flex: 1;
-  min-width: 0;
-`;
-
-const Title = styled.div`
-  font-size: 14px;
-  font-weight: 500;
-  color: #000;
-  margin-bottom: 2px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
-const Details = styled.div`
-  font-size: 12px;
-  color: #666;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
-const Duration = styled.div`
-  font-size: 12px;
-  color: #999;
-  margin-left: 8px;
-  flex-shrink: 0;
-`;
-
-const Actions = styled.div`
-  display: flex;
-  gap: 8px;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  margin-left: 8px;
-`;
-
-
-const ActionButton = styled.button`
-  background: none;
-  border: none;
-  padding: 4px;
-  border-radius: 4px;
-  cursor: pointer;
-  color: #666;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background: #e0e0e0;
-    color: #333;
-  }
-`;
+import { Song } from "../store";
+import {
+  SongContainer,
+  Thumbnail,
+  SongInfo,
+  Title,
+  Details,
+  Duration,
+  Actions,
+  ActionButton,
+  SongNumber,
+} from "../styles/SongComponent.styles";
 
 interface SongProps {
   song: Song;
@@ -99,6 +19,7 @@ interface SongProps {
   onEdit?: () => void;
   onDelete?: () => void;
   isPlaying?: boolean;
+  index: number;
 }
 
 export const SongComponent: React.FC<SongProps> = ({
@@ -108,6 +29,7 @@ export const SongComponent: React.FC<SongProps> = ({
   onPlay,
   onEdit,
   onDelete,
+  index,
 }) => {
   return (
     <SongContainer
@@ -115,6 +37,7 @@ export const SongComponent: React.FC<SongProps> = ({
       className="song-container"
       onClick={onClick}
     >
+      <SongNumber>{index + 1}</SongNumber>
       <picture>
         <source
           srcSet={`${song.images.large} 1x, ${song.images.medium} 2x, ${song.images.small} 3x`}

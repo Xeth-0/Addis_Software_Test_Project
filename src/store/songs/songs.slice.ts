@@ -5,12 +5,18 @@ interface SongState {
   list: Song[];
   loading: boolean;
   error: string | null;
+  total: number;
+  page: number;
+  limit: number;
 }
 
 const initialState: SongState = {
   list: [],
   loading: true,
   error: null,
+  total: 0,
+  page: 1,
+  limit: 0,
 };
 
 const songsSlice = createSlice({
@@ -18,12 +24,29 @@ const songsSlice = createSlice({
   initialState,
   reducers: {
     // READ
-    fetchSongsRequest(state) {
+    fetchSongsRequest(
+      state,
+      action: PayloadAction<{ limit?: number; page?: number }>
+    ) {
       state.loading = true;
       state.error = null;
+      state.limit = action.payload.limit || 0;
+      state.page = action.payload.page || 1;
+      state.total = 0;
     },
-    fetchSongsSuccess(state, action: PayloadAction<Song[]>) {
-      state.list = action.payload;
+    fetchSongsSuccess(
+      state,
+      action: PayloadAction<{
+        songs: Song[];
+        total: number;
+        page: number;
+        limit: number;
+      }>
+    ) {
+      state.list = action.payload.songs;
+      state.total = action.payload.total;
+      state.page = action.payload.page;
+      state.limit = action.payload.limit;
       state.loading = false;
     },
     fetchSongsFailure(state, action: PayloadAction<string>) {

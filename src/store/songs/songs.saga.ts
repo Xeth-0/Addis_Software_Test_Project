@@ -16,9 +16,11 @@ import {
 } from "./songs.slice";
 import { Song } from "./songs.types";
 
-function fetchSongsApi() {
+function fetchSongsApi(limit: number = 0, page: number = 1) {
   console.log("fetching songs from the API (Mirage)");
-  return fetch("/api/songs").then((res) => res.json());
+  return fetch(`/api/songs?limit=${limit}&page=${page}`).then((res) =>
+    res.json()
+  );
 }
 
 function addSongApi(song: Song) {
@@ -50,9 +52,17 @@ function deleteSongApi(id: string) {
   }).then((res) => res.json());
 }
 
-function* fetchSongsSaga() {
+function* fetchSongsSaga(
+  action: PayloadAction<{ limit: number; page: number }>
+) {
   try {
-    const data: Song[] = yield call(fetchSongsApi);
+    const data: {
+      songs: Song[];
+      total: number;
+      page: number;
+      limit: number;
+    } = yield call(fetchSongsApi, action.payload.limit, action.payload.page);
+
     yield put(fetchSongsSuccess(data));
   } catch (error) {
     yield put(
