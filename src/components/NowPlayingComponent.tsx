@@ -16,6 +16,7 @@ import {
   TimeDisplay,
 } from "../styles/NowPlaying.styles";
 import { useTheme } from "../styles/theme/ThemeContext";
+import album_placeholder from "../../public/album_placeholder.avif";
 
 interface NowPlayingBarProps {
   song: Song | null;
@@ -37,7 +38,7 @@ export const NowPlayingComponent: React.FC<NowPlayingBarProps> = ({
   onNext,
 }) => {
   if (!song) return null;
-  
+
   const { isDark } = useTheme();
 
   const progress = totalTime > 0 ? (currentTime / totalTime) * 100 : 0;
@@ -52,10 +53,18 @@ export const NowPlayingComponent: React.FC<NowPlayingBarProps> = ({
     <Container>
       <SongInfo>
         <Thumbnail
-          src={
-            song.images.small || song.images.medium || song.images.large || "https://via.placeholder.com/150"
+          src={album_placeholder}
+          srcSet={
+            `${song.images.large} 1x, ${song.images.medium} 2x, ${song.images.small} 3x` ||
+            `${album_placeholder} 1x`
           }
           alt={`${song.album} artwork`}
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = album_placeholder;
+            e.currentTarget.srcset = `${album_placeholder} 1x`;
+          }}
+          loading="lazy"
         />
         <Details>
           <Title>{song.title}</Title>

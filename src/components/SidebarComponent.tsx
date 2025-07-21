@@ -21,6 +21,7 @@ import {
 } from "../styles/NowPlaying.styles";
 import { useEffect, useRef } from "react";
 import { useTheme } from "../styles/theme/ThemeContext";
+import album_placeholder from "../../public/album_placeholder.avif";
 
 const useScrollingText = (text: string) => {
   const ref = useRef<HTMLSpanElement>(null);
@@ -118,10 +119,15 @@ export const SidebarComponent = ({
           <NowPlayingSidebarContainer className="now-playing-sidebar-container">
             <NowPlayingSidebarContainerArtwork className="now-playing-sidebar-container-artwork">
               <img
-                src={nowPlaying.images.large || nowPlaying.images.small || ""}
+                src={album_placeholder}
                 srcSet={`${nowPlaying.images.small} 60w, ${nowPlaying.images.medium} 420w, ${nowPlaying.images.large} 560w`}
                 sizes="(max-width: 600px) 60px, (max-width: 1024px) 420px, 560px"
-                alt="now-playing"
+                alt="sidebar-now-playing-artwork"
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = album_placeholder;
+                  e.currentTarget.srcset = `${album_placeholder} 1x`;
+                }}
                 loading="lazy"
               />
             </NowPlayingSidebarContainerArtwork>
