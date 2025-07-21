@@ -109,7 +109,8 @@ export const TimeDisplay = styled.div`
 export const NowPlayingSidebarContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 95%;
+  justify-content: center;
   align-items: center;
   gap: 12px;
 `;
@@ -120,7 +121,7 @@ export const NowPlayingSidebarContainerArtwork = styled.div`
   border-radius: 4px;
   align-items: center;
   justify-content: center;
-  padding: 1%;
+  margin: 20px;
 
   img {
     width: 100%;
@@ -131,8 +132,10 @@ export const NowPlayingSidebarContainerArtwork = styled.div`
   }
 `;
 
-export const NowPlayingSidebarContainerMetadata = styled.div`
-  display: flex;
+export const NowPlayingSidebarContainerMetadata = styled.div<{
+  isCollapsed: boolean;
+}>`
+  display: ${(props) => (props.isCollapsed ? "none" : "flex")};
   flex-direction: column;
   align-items: center;
   justify-content: center;

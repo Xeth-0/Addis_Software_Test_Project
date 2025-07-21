@@ -15,6 +15,7 @@ export const Sidebar = styled.div<{ isCollapsed: boolean }>`
   flex-direction: column;
   transition: width 0.3s ease;
   flex-shrink: 0;
+  
   z-index: 10;
 
   @media (max-width: 768px) {
@@ -68,10 +69,14 @@ export const SidebarNav = styled.nav`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const NavSection = styled.div`
   margin-bottom: 24px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const SectionTitle = styled.h3<{ isCollapsed: boolean }>`

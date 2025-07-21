@@ -112,47 +112,48 @@ export const SidebarComponent = ({
             )}
           </NavItem>
         </NavSection>
-        <NavSection>
-          {nowPlaying && (
-            <NowPlayingSidebarContainer className="now-playing-sidebar-container">
-              <NowPlayingSidebarContainerArtwork className="now-playing-sidebar-container-artwork">
-                <img
-                  src={nowPlaying.images.large || nowPlaying.images.small || ""}
-                  srcSet={`${nowPlaying.images.small} 60w, ${nowPlaying.images.medium} 420w, ${nowPlaying.images.large} 560w`}
-                  sizes="(max-width: 600px) 60px, (max-width: 1024px) 420px, 560px"
-                  alt="now-playing"
-                  loading="lazy"
-                />
-              </NowPlayingSidebarContainerArtwork>
-              <NowPlayingSidebarContainerMetadata className="now-playing-sidebar-container-metadata">
-                <span
-                  id="now-playing-sidebar-container-metadata-title"
-                  ref={titleRef}
-                >
-                  {nowPlaying.title}
-                </span>
-                <span
-                  id="now-playing-sidebar-container-metadata-artist"
-                  ref={artistRef}
-                >
-                  {nowPlaying.artist}
-                </span>
-                <span
-                  id="now-playing-sidebar-container-metadata-album"
-                  ref={albumRef}
-                >
-                  {nowPlaying.album}
-                </span>
-                <span
-                  id="now-playing-sidebar-container-metadata-year"
-                  ref={yearRef}
-                >
-                  {nowPlaying.year}
-                </span>
-              </NowPlayingSidebarContainerMetadata>
-            </NowPlayingSidebarContainer>
-          )}
-        </NavSection>
+        {nowPlaying && (
+          <NowPlayingSidebarContainer className="now-playing-sidebar-container">
+            <NowPlayingSidebarContainerArtwork className="now-playing-sidebar-container-artwork">
+              <img
+                src={nowPlaying.images.large || nowPlaying.images.small || ""}
+                srcSet={`${nowPlaying.images.small} 60w, ${nowPlaying.images.medium} 420w, ${nowPlaying.images.large} 560w`}
+                sizes="(max-width: 600px) 60px, (max-width: 1024px) 420px, 560px"
+                alt="now-playing"
+                loading="lazy"
+              />
+            </NowPlayingSidebarContainerArtwork>
+            <NowPlayingSidebarContainerMetadata
+              className="now-playing-sidebar-container-metadata"
+              isCollapsed={isSidebarCollapsed}
+            >
+              <span
+                id="now-playing-sidebar-container-metadata-title"
+                ref={titleRef}
+              >
+                {nowPlaying.title}
+              </span>
+              <span
+                id="now-playing-sidebar-container-metadata-artist"
+                ref={artistRef}
+              >
+                {nowPlaying.artist}
+              </span>
+              <span
+                id="now-playing-sidebar-container-metadata-album"
+                ref={albumRef}
+              >
+                {nowPlaying.album}
+              </span>
+              <span
+                id="now-playing-sidebar-container-metadata-year"
+                ref={yearRef}
+              >
+                {nowPlaying.year}
+              </span>
+            </NowPlayingSidebarContainerMetadata>
+          </NowPlayingSidebarContainer>
+        )}
       </SidebarNav>
     </Sidebar>
   );
