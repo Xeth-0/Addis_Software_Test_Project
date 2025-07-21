@@ -25,6 +25,16 @@ export const SongContainer = styled.div`
   &:active {
     background: #e8e8e8;
   }
+
+  @media (max-width: 768px) {
+    padding: 8px 12px;
+  }
+
+  @media (max-width: 768px) {
+    .song-actions {
+      opacity: 1;
+    }
+  }
 `;
 
 export const Thumbnail = styled.img`

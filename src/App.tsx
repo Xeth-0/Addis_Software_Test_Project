@@ -23,7 +23,6 @@ import {
   MobileOverlay,
   MobileToggle,
 } from "./styles/App.styles";
-import { SONGS_PER_PAGE } from "./constants";
 
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,7 +31,6 @@ const App = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [nowPlaying, setNowPlaying] = useState<Song | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [songsPerPage, setSongsPerPage] = useState(SONGS_PER_PAGE || 50);
 
   const dispatch = useDispatch();
 
@@ -85,11 +83,16 @@ const App = () => {
   return (
     <>
       <AppContainer className="app-container" id="app-container">
-        <MobileToggle onClick={toggleSidebar}>
-          <Menu size={20} />
+        <MobileToggle
+          id="mobile-toggle"
+          onClick={toggleSidebar}
+          isVisible={isSidebarCollapsed}
+        >
+          <Menu id="menu-icon" size={20} />
         </MobileToggle>
 
         <MobileOverlay
+          id="mobile-overlay"
           isVisible={!isSidebarCollapsed}
           onClick={() => setIsSidebarCollapsed(true)}
         />
@@ -104,6 +107,7 @@ const App = () => {
         <MainContent>
           <ContentArea className="content-area">
             {/* <SongListWrapper> */}
+           
             <SongListComponent
               title={
                 activeNav === "library"
