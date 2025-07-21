@@ -1,5 +1,6 @@
 import { createServer, Model } from "miragejs";
 import songs from "./data/songs.json";
+import { v4 as uuidv4 } from "uuid";
 
 export function makeServer({ environment = "development" } = {}) {
   return createServer({
@@ -64,7 +65,7 @@ export function makeServer({ environment = "development" } = {}) {
       // POST new song
       this.post("/songs", (schema, request) => {
         const attrs = JSON.parse(request.requestBody);
-        return schema.db.songs.insert(attrs);
+        return schema.db.songs.insert({ ...attrs, id: uuidv4() });
       });
 
       // PUT update song

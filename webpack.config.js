@@ -1,7 +1,6 @@
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { webpack } = require("webpack");
 const Dotenv = require("dotenv-webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = (env, _) => {
   return {
@@ -66,6 +65,7 @@ module.exports = (env, _) => {
       splitChunks: {
         chunks: "all",
       },
+      minimize: true,
     },
     devServer: {
       static: path.join(__dirname, "dist"),
