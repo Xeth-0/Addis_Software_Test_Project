@@ -90,7 +90,7 @@ export const SongComponent: React.FC<SongProps> = ({
         <ActionButton onClick={onEdit} title="Edit" hoverFillColor="#2A1458">
           <Edit2 size={16} color="#666" />
         </ActionButton>
-        <ActionButton onClick={onDelete} title="Delete" hoverFillColor="#2A1458">
+        <ActionButton onClick={onDelete} title="Delete" hoverFillColor="#EB5B00">
           <Trash size={16} color="#ff0000" />
         </ActionButton>
       </Actions>

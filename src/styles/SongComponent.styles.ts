@@ -107,6 +107,7 @@ export const ActionButton = styled.button<{ hoverFillColor: string }>`
       color: ${({ theme, hoverFillColor }) =>
         hoverFillColor || theme.colors.primary};
       background: ${({ theme }) => theme.colors.hoverBackground};
+      opacity: 0.6;
       transform: scale(1.15);
       position: relative;
       transition: fill 0.2s, background 0.2s, transform 0.2s;
