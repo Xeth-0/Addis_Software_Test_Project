@@ -72,14 +72,14 @@ export const ControlsContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 12px 16px;
-  background: ${({ theme }) => theme.colors.tertiaryBackground};
+  background: ${({ theme }) => theme.colors.secondaryBackground};
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
   flex-wrap: wrap;
 `;
 
 export const SliderContainer = styled.div`
   padding: 12px 16px;
-  background: ${({ theme }) => theme.colors.tertiaryBackground};
+  background: ${({ theme }) => theme.colors.secondaryBackground};
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 `;
 

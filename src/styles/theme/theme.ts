@@ -1,36 +1,36 @@
 export const lightTheme = {
   colors: {
-    // Core backgrounds
-    background: "#ffffff",
-    secondaryBackground: "#f8f8f8",
-    tertiaryBackground: "#fafafa",
-    
-    // Text colors
-    text: "#333333",
-    secondaryText: "#666666",
-    tertiaryText: "#999999",
-    mutedText: "#888888",
-    
+    // Core backgrounds (tinted with 78B9B5)
+    background: "#eaf6f5", 
+    secondaryBackground: "#d2ecea", 
+    tertiaryBackground: "#bfe2df", 
+
+    // Text colors (maintain contrast)
+    text: "#065084",
+    secondaryText: "#0F828C",
+    tertiaryText: "#320A6B",
+    mutedText: "#78B9B5",
+
     // Interactive elements
-    primary: "#007AFF",
-    primaryHover: "#0056CC",
-    secondary: "#6c757d",
-    
+    primary: "#0F828C",
+    primaryHover: "#065084",
+    secondary: "#320A6B",
+
     // UI elements
-    border: "#e5e5e5",
-    borderLight: "#ddd",
-    hoverBackground: "#f7f7f7",
-    activeBackground: "#e8e8e8",
-    disabledBackground: "#f0f0f0",
-    disabledText: "#999999",
-    
-    // Overlays and shadows
-    overlay: "rgba(0, 0, 0, 0.5)",
-    backdropBlur: "rgba(248, 248, 248, 0.95)",
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-    modalShadow: "0 20px 40px rgba(0, 0, 0, 0.3)",
-    listShadow: "0 12px 20px rgba(0, 0, 0, 0.1)",
-    loadingOverlay: "rgba(255, 255, 255, 0.85)",
+    border: "#0F828C",
+    borderLight: "#78B9B5",
+    hoverBackground: "#d2ecea",
+    activeBackground: "#bfe2df",
+    disabledBackground: "#eaf6f5",
+    disabledText: "#bfe2df",
+
+    // Overlays and shadows (keep overlays neutral for readability)
+    overlay: "rgba(6, 80, 132, 0.08)",
+    backdropBlur: "rgba(234, 246, 245, 0.95)",
+    boxShadow: "0 2px 4px rgba(50, 10, 107, 0.08)",
+    modalShadow: "0 20px 40px rgba(15, 130, 140, 0.18)",
+    listShadow: "0 12px 20px rgba(120, 185, 181, 0.12)",
+    loadingOverlay: "rgba(234, 246, 245, 0.85)",
   },
   typography: {
     fontFamily: "Inter, sans-serif",
@@ -40,37 +40,37 @@ export const lightTheme = {
 
 export const darkTheme = {
   colors: {
-    // Core backgrounds
-    background: "#1a1a1a",
-    secondaryBackground: "#2a2a2a",
-    tertiaryBackground: "#333333",
-    
-    // Text colors
-    text: "#ffffff",
-    secondaryText: "#cccccc",
-    tertiaryText: "#999999",
-    mutedText: "#888888",
-    
-    // Interactive elements
-    primary: "#0984ff",
-    primaryHover: "#0066cc",
-    secondary: "#ced4da",
-    
+    // Core backgrounds (tinted with #222831 and #393E46)
+    background: "#222831", 
+    secondaryBackground: "#393E46", 
+    tertiaryBackground: "#2d323a", 
+
+    // Text colors (high contrast, inspired by #EEEEEE)
+    text: "#EEEEEE", 
+    secondaryText: "#bfc6ce", 
+    tertiaryText: "#7e8a99", 
+    mutedText: "#00ADB5", 
+
+    // Interactive elements (tinted with #00ADB5)
+    primary: "#00ADB5", 
+    primaryHover: "#019ca3", 
+    secondary: "#EEEEEE", 
+
     // UI elements
-    border: "#444444",
-    borderLight: "#555555",
-    hoverBackground: "#3a3a3a",
-    activeBackground: "#4a4a4a",
-    disabledBackground: "#2a2a2a",
-    disabledText: "#666666",
-    
-    // Overlays and shadows
-    overlay: "rgba(0, 0, 0, 0.7)",
-    backdropBlur: "rgba(42, 42, 42, 0.95)",
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",
-    modalShadow: "0 20px 40px rgba(0, 0, 0, 0.6)",
-    listShadow: "0 12px 20px rgba(0, 0, 0, 0.3)",
-    loadingOverlay: "rgba(26, 26, 26, 0.85)",
+    border: "#00ADB5", 
+    borderLight: "#393E46", 
+    hoverBackground: "#31363f", 
+    activeBackground: "#23272f", 
+    disabledBackground: "#393E46", 
+    disabledText: "#7e8a99", 
+
+    // Overlays and shadows (cool, dark overlays)
+    overlay: "rgba(34, 40, 49, 0.85)", 
+    backdropBlur: "rgba(34, 40, 49, 0.95)", 
+    boxShadow: "0 2px 4px rgba(0, 173, 181, 0.10)", 
+    modalShadow: "0 20px 40px rgba(0, 173, 181, 0.18)", 
+    listShadow: "0 12px 20px rgba(0, 173, 181, 0.10)", 
+    loadingOverlay: "rgba(34, 40, 49, 0.85)", 
   },
   typography: {
     fontFamily: "Inter, sans-serif",
