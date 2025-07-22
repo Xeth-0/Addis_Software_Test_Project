@@ -80,7 +80,7 @@ export const SongModalComponent: React.FC<SongModalProps> = ({
     onClose();
   };
 
-  const handleChange = (field: string, value: string | number) => {
+  const handleChange = (field: string, value: string | number | object) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -142,9 +142,15 @@ export const SongModalComponent: React.FC<SongModalProps> = ({
           <FormGroup>
             <Label>Thumbnail URL</Label>
             <Input
-              type="url"
+              type="text"
               value={formData.images.large}
-              onChange={(e) => handleChange("images.large", e.target.value)}
+              onChange={(e) => {
+                handleChange("images", {
+                  large: e.target.value,
+                  medium: e.target.value,
+                  small: e.target.value,
+                });
+              }}
               placeholder="https://example.com/image.jpg"
             />
           </FormGroup>

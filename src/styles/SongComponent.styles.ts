@@ -86,7 +86,7 @@ export const Actions = styled.div`
   margin-left: 8px;
 `;
 
-export const ActionButton = styled.button`
+export const ActionButton = styled.button<{ hoverFillColor: string }>`
   background: none;
   border: none;
   padding: 4px;
@@ -102,9 +102,13 @@ export const ActionButton = styled.button`
 
   svg {
     &:hover {
-      fill: ${({ theme }) => theme.colors.primary};
+      fill: ${({ theme, hoverFillColor }) =>
+        hoverFillColor || theme.colors.primary};
+      color: ${({ theme, hoverFillColor }) =>
+        hoverFillColor || theme.colors.primary};
       background: ${({ theme }) => theme.colors.hoverBackground};
       transform: scale(1.15);
+      position: relative;
       transition: fill 0.2s, background 0.2s, transform 0.2s;
     }
   }

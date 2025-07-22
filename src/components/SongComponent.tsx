@@ -75,7 +75,7 @@ export const SongComponent: React.FC<SongProps> = ({
           {song.artist} • {song.album} • {song.year}
         </Details>
       </SongInfo>
-      <ActionButton onClick={onFavorite} title="Favorite">
+      <ActionButton onClick={onFavorite} title="Favorite" hoverFillColor="#EB5B00">
         <Heart
           size={16}
           color={isFavorite ? "#FF5050" : "#666"}
@@ -84,13 +84,13 @@ export const SongComponent: React.FC<SongProps> = ({
       </ActionButton>
       <Duration>{song.duration}</Duration>
       <Actions className="song-actions">
-        <ActionButton onClick={onPlay} title="Play" aria-label="Play">
+        <ActionButton onClick={onPlay} title="Play" aria-label="Play" hoverFillColor="#2A1458">
           <Play size={16} color={isPlaying ? "#007AFF" : "#666"} />
         </ActionButton>
-        <ActionButton onClick={onEdit} title="Edit">
+        <ActionButton onClick={onEdit} title="Edit" hoverFillColor="#2A1458">
           <Edit2 size={16} color="#666" />
         </ActionButton>
-        <ActionButton onClick={onDelete} title="Delete">
+        <ActionButton onClick={onDelete} title="Delete" hoverFillColor="#2A1458">
           <Trash size={16} color="#ff0000" />
         </ActionButton>
       </Actions>
